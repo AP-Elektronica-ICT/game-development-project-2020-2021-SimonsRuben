@@ -9,9 +9,8 @@ namespace GameDevProject
     {
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
+        private List<Texture2D> Herotextures;
 
-        private Texture2D textureright;
-        private Texture2D textureleft;
 
         Hero hero;
 
@@ -34,8 +33,9 @@ namespace GameDevProject
         protected override void LoadContent()
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
-            textureright = Content.Load<Texture2D>("HeroSpriteSheet");
-            textureleft = Content.Load<Texture2D>("HeroLeft");
+            Herotextures = new List<Texture2D>();
+            Herotextures.Add(Content.Load<Texture2D>("HeroLeft"));
+            Herotextures.Add(Content.Load<Texture2D>("HeroRight"));
 
 
             InitializeGameObject();
@@ -43,7 +43,7 @@ namespace GameDevProject
         }
         private void InitializeGameObject()
         {
-            hero = new Hero(textureright,textureleft);
+            hero = new Hero(Herotextures);
         }
 
         protected override void Update(GameTime gameTime)
