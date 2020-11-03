@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using System.Collections.Generic;
 
 namespace GameDevProject
 {
@@ -8,6 +9,13 @@ namespace GameDevProject
     {
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
+
+        private Texture2D textureright;
+        private Texture2D textureleft;
+
+        Hero hero;
+
+       
 
         public Game1()
         {
@@ -26,8 +34,16 @@ namespace GameDevProject
         protected override void LoadContent()
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
+            textureright = Content.Load<Texture2D>("HeroSpriteSheet");
+            textureleft = Content.Load<Texture2D>("HeroLeft");
 
+
+            InitializeGameObject();
             // TODO: use this.Content to load your game content here
+        }
+        private void InitializeGameObject()
+        {
+            hero = new Hero(textureright,textureleft);
         }
 
         protected override void Update(GameTime gameTime)
@@ -36,6 +52,7 @@ namespace GameDevProject
                 Exit();
 
             // TODO: Add your update logic here
+            hero.Update(gameTime);
 
             base.Update(gameTime);
         }
@@ -43,6 +60,16 @@ namespace GameDevProject
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
+            /*
+            _spriteBatch.Begin(SpriteSortMode.Immediate, null, null, null, null, null,Matrix.CreateScale(1.5f));
+            de lijn hierboven zal alle sprites op het scherm vergroten naar 1.5 keer de orginele grote
+
+            */
+            //_spriteBatch.Begin();
+            
+            _spriteBatch.Begin(SpriteSortMode.Immediate, null, null, null, null, null, Matrix.CreateScale(2f));
+            hero.Draw(_spriteBatch);
+            _spriteBatch.End();
 
             // TODO: Add your drawing code here
 
