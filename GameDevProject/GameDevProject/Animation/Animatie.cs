@@ -27,7 +27,7 @@ namespace GameDevProject.Animation
         {
             CurrentFrame = frames[counter];
             framemovement += CurrentFrame.SourceRectangle.Width * Gametime.ElapsedGameTime.TotalSeconds;
-            if (framemovement >= CurrentFrame.SourceRectangle.Width / 5)
+            if (framemovement >= CurrentFrame.SourceRectangle.Width / 7)
             {
                 counter++;
                 framemovement = 0;
