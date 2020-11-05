@@ -8,7 +8,10 @@ namespace GameDevProject.Interfaces
 {
     interface ITransform
     {
+        Vector2 HorizontalMovement { get; set; }
+        Vector2 VerticalMovement { get; set; }
 
        Vector2 Position { get; set; }
+
 }
 }

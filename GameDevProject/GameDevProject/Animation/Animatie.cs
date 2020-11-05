@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using GameDevProject.Interfaces;
+using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -7,7 +8,7 @@ namespace GameDevProject.Animation
 {
     class Animatie
     {
-        private List<AnimationFrame> frames;
+        protected List<AnimationFrame> frames;
         public AnimationFrame CurrentFrame { get; set; }
 
         private int counter;
@@ -18,12 +19,12 @@ namespace GameDevProject.Animation
         {
             frames = new List<AnimationFrame>();
         }
-        public void AddFrame(AnimationFrame animationframe)
+        public virtual void  AddFrame(AnimationFrame animationframe)
         {
             frames.Add(animationframe);
             CurrentFrame = frames[0];
         }
-        public void update(GameTime Gametime)
+        public virtual void update(GameTime Gametime,ITransform entity)
         {
             CurrentFrame = frames[counter];
             framemovement += CurrentFrame.SourceRectangle.Width * Gametime.ElapsedGameTime.TotalSeconds;

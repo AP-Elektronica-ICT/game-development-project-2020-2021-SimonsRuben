@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using GameDevProject.Interfaces;
+using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -7,7 +8,9 @@ namespace GameDevProject.Input
 {
     interface IinputReader
     {
-        Vector2 Readinput();
+        Vector2 ReadLeftRight();
+        void IsJumping(ITransform transform);
+        Vector2 ReadAttack();
         
     }
 }

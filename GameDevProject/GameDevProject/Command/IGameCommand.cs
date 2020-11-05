@@ -9,6 +9,7 @@ namespace GameDevProject.Command
 {
     interface IGameCommand
     {
-        void Execute(ITransform transform, Vector2 direction);
+        void ExecuteHorizontal(ITransform transform, Vector2 direction);
+        void ExecuteVertical(ITransform transform , float ground);
     }
 }
