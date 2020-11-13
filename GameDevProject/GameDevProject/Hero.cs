@@ -54,8 +54,7 @@ namespace GameDevProject
 
 
 
-
-
+            
             //jumping
             //Char loc, X/Y
             startY = Position.Y;//Starting position
@@ -106,7 +105,6 @@ namespace GameDevProject
         }
         private void UpdateAnimations(GameTime gametime)
         {
-            
             animations[(int)status][(int)richting].update(gametime,this);
         }
 

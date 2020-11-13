@@ -19,7 +19,7 @@ namespace GameDevProject.Command
         public void ExecuteVertical(ITransform transform, float ground)
         {
             //Bron voor de jump code: http://flatformer.blogspot.com/2010/02/making-character-jump-in-xnac-basic.html
-
+            
 
             transform.Position += new Vector2(0, transform.VerticalMovement.Y);//Making it go up
             transform.VerticalMovement = new Vector2(transform.VerticalMovement.X, transform.VerticalMovement.Y + 0.2f);

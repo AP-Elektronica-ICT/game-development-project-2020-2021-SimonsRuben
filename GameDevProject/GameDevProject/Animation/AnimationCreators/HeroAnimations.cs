@@ -8,6 +8,22 @@ namespace GameDevProject.Animation.AnimationCreators
     class HeroAnimations : IAnimation,IjumpingAnimation
     {
 
+        public Animatie CreateAnimation(string animatie)
+        {
+            //Factory
+            return null;
+        }
+
+
+        /*
+         * 
+         * HEEL DE ANIMATIE CREATOR VERANDEREN VIA HET FACTORY PATROON
+         * ZIE DIGITAP VOOR INFO FACTORY
+         * 
+         * 
+         * 
+         * 
+         * */
 
         public Animatie CreateLeftAttack()
         {
