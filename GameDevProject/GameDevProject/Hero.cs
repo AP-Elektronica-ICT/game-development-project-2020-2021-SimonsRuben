@@ -75,7 +75,7 @@ namespace GameDevProject
 
         public void Update(GameTime gametime)
         {
-            Debug.Write(Hero.status);
+            
             StatePicker();
             UpdateAnimations(gametime);
             MoveHorizontal(inputreader.ReadLeftRight());

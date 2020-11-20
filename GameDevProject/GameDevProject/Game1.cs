@@ -69,6 +69,8 @@ namespace GameDevProject
 
         private void loadmapcontent()
         {
+            //https://www.trccompsci.online/mediawiki/index.php/Using_a_tmx_map_in_monogame
+            // the whole map is made with tiledsharp see above link for documentation
             map = new TmxMap("Content/test.tmx");
             tileset = Content.Load<Texture2D>(map.Tilesets[0].Name.ToString());
 
