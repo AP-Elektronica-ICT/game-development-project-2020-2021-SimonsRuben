@@ -27,6 +27,10 @@ namespace GameDevProject
         List<Rectangle> collisions = new List<Rectangle>();
 
 
+
+
+        Texture2D testtext;
+
         public Game1()
         {
             _graphics = new GraphicsDeviceManager(this);
@@ -37,6 +41,9 @@ namespace GameDevProject
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
+            _graphics.PreferredBackBufferWidth = 1600;
+            _graphics.PreferredBackBufferHeight = 900;
+            _graphics.ApplyChanges();
 
             base.Initialize();
         }
@@ -48,6 +55,9 @@ namespace GameDevProject
             Herotextures.Add(Content.Load<Texture2D>("HeroLeft"));
             Herotextures.Add(Content.Load<Texture2D>("HeroRight"));
 
+
+            testtext = new Texture2D(GraphicsDevice, 1, 1);
+            testtext.SetData(new Color[] { Color.DarkSlateGray });
 
             InitializeGameObject();
             loadmapcontent();
@@ -70,14 +80,14 @@ namespace GameDevProject
             tilesetTilesWide = tileset.Width / tileWidth;
             tilesetTilesHigh = tileset.Height / tileHeight;
 
-            Debug.WriteLine(map.ObjectGroups.Count);
+            //Debug.WriteLine(map.ObjectGroups.Count);
 
-            /*foreach (var o in map.ObjectGroups[3].Objects)
+            foreach (var o in map.ObjectGroups[0].Objects)
             {
                 collisions.Add(new Rectangle((int)o.X, (int)o.Y, (int)o.Width, (int)o.Height));
             }
-            */
-            //Debug.WriteLine(collisions);
+            
+            Debug.WriteLine(collisions.Count);
                 
         }
         protected override void Update(GameTime gameTime)
@@ -101,11 +111,16 @@ namespace GameDevProject
             */
             _spriteBatch.Begin();
             drawmap();
-            _spriteBatch.End();
-            _spriteBatch.Begin(SpriteSortMode.Immediate, null, null, null, null, null, Matrix.CreateScale(2f));
             hero.Draw(_spriteBatch);
-            //drawmap();
+
             _spriteBatch.End();
+            foreach (Rectangle collisionobject in collisions)
+            {
+                if (CheckCollision(hero.CollisionRectangle, collisionobject))
+                {
+                    Debug.WriteLine(collisionobject.Location);
+                }
+            }
 
             // TODO: Add your drawing code here
 
@@ -141,6 +156,14 @@ namespace GameDevProject
                 }
             }
             
+        }
+        private bool CheckCollision(Rectangle entity1,Rectangle entity2)
+        {
+            if (entity1.Intersects(entity2))
+            {
+                return true;
+            }
+            return false;
         }
     }
 }

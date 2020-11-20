@@ -14,7 +14,7 @@
 
 #---------------------------------- Content ---------------------------------#
 
-#begin HeroLeft.png
+#begin sprites/HeroLeft.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -24,9 +24,9 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:HeroLeft.png
+/build:sprites/HeroLeft.png
 
-#begin HeroSpriteSheet.png
+#begin sprites/HeroRight.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -36,12 +36,15 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:HeroSpriteSheet.png
+/build:sprites/HeroRight.png
 
-#begin test.tmx
-/copy:test.tmx
+#begin tilemap/test.tmx
+/copy:tilemap/test.tmx
 
-#begin tilesettest.webp
+#begin tilemap/tilesettest.tsx
+/copy:tilemap/tilesettest.tsx
+
+#begin tilemap/tilesettest.webp
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -51,5 +54,5 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:tilesettest.webp
+/build:tilemap/tilesettest.webp
 

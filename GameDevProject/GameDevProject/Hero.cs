@@ -28,6 +28,13 @@ namespace GameDevProject
         public Vector2 Position { get; set; }
         public Vector2 HorizontalMovement { get; set; }
         public Vector2 VerticalMovement { get; set; }
+        public Rectangle CollisionRectangle
+        {
+            get { return _CollisionRectangle; }
+            set { _CollisionRectangle = value; }
+        }
+
+        private Rectangle _CollisionRectangle;
         float startY;
 
 
@@ -36,9 +43,9 @@ namespace GameDevProject
 
         public Hero(List<Texture2D> textures)
         {
-            Position = new Vector2(230, 200);
+            Position = new Vector2(230, 400);
             VerticalMovement = new Vector2(0, 0);// X: -1 => naar beneden 0 => stil 1=>naar boven    Y: current jump speed
-            HorizontalMovement = new Vector2(0, 2);// X: richting -1 => links 0=> stil 1=> rechts    Y: Current movespeed
+            HorizontalMovement = new Vector2(0, 4);// X: richting -1 => links 0=> stil 1=> rechts    Y: Current movespeed
             status = CharState.idle;
             richting = LoopRichting.rechts;
             herotexture = textures;
@@ -52,20 +59,10 @@ namespace GameDevProject
             this.inputreader = new KeyboardReader();
             this.movecommand = new MoveCommand();
 
+            CollisionRectangle = new Rectangle((int)Position.X, (int)Position.Y, 50,60);
 
 
-            
-            //jumping
-            //Char loc, X/Y
             startY = Position.Y;//Starting position
-
-
-
-
-
-
-
-
 
         }
         public void Draw(SpriteBatch _spriteBatch)
@@ -81,6 +78,9 @@ namespace GameDevProject
             UpdateAnimations(gametime);
             MoveHorizontal(inputreader.ReadLeftRight());
             MoveVertical();
+            _CollisionRectangle.X = (int)Position.X;
+            _CollisionRectangle.Y = (int)Position.Y;
+
 
 
 

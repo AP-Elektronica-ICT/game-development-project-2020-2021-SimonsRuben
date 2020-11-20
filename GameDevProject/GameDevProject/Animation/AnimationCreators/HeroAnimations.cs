@@ -7,7 +7,8 @@ namespace GameDevProject.Animation.AnimationCreators
 {
     class HeroAnimations : IAnimation,IjumpingAnimation
     {
-
+        private int height = 50;
+        private int width = 60;
         public Animatie CreateAnimation(string animatie)
         {
             //Factory
@@ -37,20 +38,20 @@ namespace GameDevProject.Animation.AnimationCreators
         public Animatie CreateLeftIdle()
         {
             Animatie idleL = new Animatie();
-            idleL.AddFrame(new AnimationFrame(new Rectangle(198, 5, 25, 30)));
-            idleL.AddFrame(new AnimationFrame(new Rectangle(248, 5, 25, 30)));
-            idleL.AddFrame(new AnimationFrame(new Rectangle(298, 5, 25, 30)));
-            idleL.AddFrame(new AnimationFrame(new Rectangle(348, 5, 25, 30)));
+            idleL.AddFrame(new AnimationFrame(new Rectangle(396, 10, height, width)));
+            idleL.AddFrame(new AnimationFrame(new Rectangle(496, 10, height, width)));
+            idleL.AddFrame(new AnimationFrame(new Rectangle(596, 10, height, width)));
+            idleL.AddFrame(new AnimationFrame(new Rectangle(696, 10, height, width)));
             return idleL;
         }
 
         public Animatie CreateRightIdle()
         {
             Animatie idleR = new Animatie();
-            idleR.AddFrame(new AnimationFrame(new Rectangle(12, 5, 25, 30)));
-            idleR.AddFrame(new AnimationFrame(new Rectangle(62, 5, 25, 30)));
-            idleR.AddFrame(new AnimationFrame(new Rectangle(112, 5, 25, 30)));
-            idleR.AddFrame(new AnimationFrame(new Rectangle(162, 5, 25, 30)));
+            idleR.AddFrame(new AnimationFrame(new Rectangle(24, 10, height, width)));
+            idleR.AddFrame(new AnimationFrame(new Rectangle(124, 10, height, width)));
+            idleR.AddFrame(new AnimationFrame(new Rectangle(224, 10, height, width)));
+            idleR.AddFrame(new AnimationFrame(new Rectangle(324, 10, height, width)));
             return idleR;
         }
 
@@ -58,24 +59,24 @@ namespace GameDevProject.Animation.AnimationCreators
         public Animatie CreateLeftRun()
         {
             Animatie runL = new Animatie();
-            runL.AddFrame(new AnimationFrame(new Rectangle(296, 44, 25, 30)));
-            runL.AddFrame(new AnimationFrame(new Rectangle(245, 44, 25, 30)));
-            runL.AddFrame(new AnimationFrame(new Rectangle(196, 44, 25, 30)));
-            runL.AddFrame(new AnimationFrame(new Rectangle(144, 44, 25, 30)));
-            runL.AddFrame(new AnimationFrame(new Rectangle(96, 44, 25, 30)));
-            runL.AddFrame(new AnimationFrame(new Rectangle(46, 44, 25, 30)));
+            runL.AddFrame(new AnimationFrame(new Rectangle(592, 88, height, width)));
+            runL.AddFrame(new AnimationFrame(new Rectangle(490, 88, height, width)));
+            runL.AddFrame(new AnimationFrame(new Rectangle(392, 88, height, width)));
+            runL.AddFrame(new AnimationFrame(new Rectangle(288, 88, height, width)));
+            runL.AddFrame(new AnimationFrame(new Rectangle(192, 88, height, width)));
+            runL.AddFrame(new AnimationFrame(new Rectangle(92, 88, height, width)));
             return runL;
         }
         
         public Animatie CreateRightRun()
         {
             Animatie runR = new Animatie();
-            runR.AddFrame(new AnimationFrame(new Rectangle(64, 44, 25, 30)));
-            runR.AddFrame(new AnimationFrame(new Rectangle(114, 44, 25, 30)));
-            runR.AddFrame(new AnimationFrame(new Rectangle(164, 44, 25, 30)));
-            runR.AddFrame(new AnimationFrame(new Rectangle(215, 44, 25, 30)));
-            runR.AddFrame(new AnimationFrame(new Rectangle(263, 44, 25, 30)));
-            runR.AddFrame(new AnimationFrame(new Rectangle(313, 44, 25, 30)));
+            runR.AddFrame(new AnimationFrame(new Rectangle(128, 88, height, width)));
+            runR.AddFrame(new AnimationFrame(new Rectangle(228, 88, height, width)));
+            runR.AddFrame(new AnimationFrame(new Rectangle(328, 88, height, width)));
+            runR.AddFrame(new AnimationFrame(new Rectangle(428, 88, height, width)));
+            runR.AddFrame(new AnimationFrame(new Rectangle(528, 88, height, width)));
+            runR.AddFrame(new AnimationFrame(new Rectangle(628, 88, height, width)));
             return runR;
         }
             
@@ -115,16 +116,16 @@ namespace GameDevProject.Animation.AnimationCreators
         public Animatie CreateLeftJump()
         {
             Animatie jumpL = new JumpingAnimatie();
-            jumpL.AddFrame(new AnimationFrame(new Rectangle(246, 79, 25, 30)));
-            jumpL.AddFrame(new AnimationFrame(new Rectangle(248, 113, 25, 30)));
+            jumpL.AddFrame(new AnimationFrame(new Rectangle(492, 158, height, width)));
+            jumpL.AddFrame(new AnimationFrame(new Rectangle(496, 226, height, width)));
             return jumpL;
         }
 
         public Animatie CreateRightJump()
         {
             Animatie jumpR = new JumpingAnimatie();
-            jumpR.AddFrame(new AnimationFrame(new Rectangle(114, 80, 25, 30)));
-            jumpR.AddFrame(new AnimationFrame(new Rectangle(115, 113, 25, 30)));
+            jumpR.AddFrame(new AnimationFrame(new Rectangle(228, 160, height, width)));
+            jumpR.AddFrame(new AnimationFrame(new Rectangle(230, 226, height, width)));
             return jumpR;
         }
     }
