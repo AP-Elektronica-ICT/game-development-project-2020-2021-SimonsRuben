@@ -10,6 +10,7 @@ using GameDevProject.Command;
 using GameDevProject.Interfaces;
 using System.Diagnostics;
 using Microsoft.Xna.Framework.Input;
+using GameDevProject.Detections;
 
 namespace GameDevProject 
 {
@@ -41,9 +42,9 @@ namespace GameDevProject
 
 
 
-        public Hero(List<Texture2D> textures)
+        public Hero(List<Texture2D> textures,CollisionDetection objects)
         {
-            Position = new Vector2(230, 400);
+            Position = new Vector2(600, 400);
             VerticalMovement = new Vector2(0, 0);// X: -1 => naar beneden 0 => stil 1=>naar boven    Y: current jump speed
             HorizontalMovement = new Vector2(0, 4);// X: richting -1 => links 0=> stil 1=> rechts    Y: Current movespeed
             status = CharState.idle;
@@ -57,7 +58,7 @@ namespace GameDevProject
             animations.Add(heroanimations.Jump());
             //animations.Add(heroanimations.Attack());animaties nog toevoegen
             this.inputreader = new KeyboardReader();
-            this.movecommand = new MoveCommand();
+            this.movecommand = new MoveCommand(objects);
 
             CollisionRectangle = new Rectangle((int)Position.X, (int)Position.Y, 50,60);
 
@@ -74,6 +75,7 @@ namespace GameDevProject
 
         public void Update(GameTime gametime)
         {
+            Debug.Write(Hero.status);
             StatePicker();
             UpdateAnimations(gametime);
             MoveHorizontal(inputreader.ReadLeftRight());
@@ -112,12 +114,14 @@ namespace GameDevProject
         private void MoveVertical()
         {
             inputreader.IsJumping(this);
+            movecommand.ExecuteVertical(this, startY);/*
             if (status == CharState.jumping)
             {
 
                 movecommand.ExecuteVertical(this,startY);
                 
-            }
+            }*/
+            
 
         }
         private void MoveHorizontal(Vector2 _direction)

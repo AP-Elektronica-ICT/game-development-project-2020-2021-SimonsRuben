@@ -13,5 +13,10 @@ namespace GameDevProject.Interfaces
 
        Vector2 Position { get; set; }
 
-}
+        public Rectangle CollisionRectangle { get; set; }
+        
+
+       
+
+    }
 }
