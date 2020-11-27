@@ -51,5 +51,19 @@ namespace GameDevProject.Detections
             }
             return false;
         }
+        public int SearchTopCollider(Rectangle character)
+        {
+            foreach (Rectangle item in walls)
+            {
+                if (CheckCollision(character, item))
+                {
+                    //Debug.WriteLine("COLLISION");
+                    Debug.WriteLine(item.Top);
+                    return item.Top;
+                }
+
+            }
+            return 0;
+        }
     }
 }

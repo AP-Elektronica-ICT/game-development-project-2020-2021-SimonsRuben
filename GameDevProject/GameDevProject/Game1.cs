@@ -39,7 +39,7 @@ namespace GameDevProject
         {
             // TODO: Add your initialization logic here
             _graphics.PreferredBackBufferWidth = 1600;
-            _graphics.PreferredBackBufferHeight = 900;
+            _graphics.PreferredBackBufferHeight = 960;
             _graphics.ApplyChanges();
 
             base.Initialize();
@@ -49,8 +49,8 @@ namespace GameDevProject
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
             Herotextures = new List<Texture2D>();
-            Herotextures.Add(Content.Load<Texture2D>("HeroLeft"));
-            Herotextures.Add(Content.Load<Texture2D>("HeroRight"));
+            Herotextures.Add(Content.Load<Texture2D>("Hero/HeroLeft"));
+            Herotextures.Add(Content.Load<Texture2D>("Hero/HeroRight"));
 
             debugchar = new Texture2D(GraphicsDevice, 1, 1);
             debugchar.SetData(new Color[] { Color.DarkSlateGray });
@@ -71,7 +71,7 @@ namespace GameDevProject
         {
             //https://www.trccompsci.online/mediawiki/index.php/Using_a_tmx_map_in_monogame
             // the whole map is made with tiledsharp see above link for documentation
-            map = new TmxMap("Content/test.tmx");
+            map = new TmxMap("Content/map/testfirstmap.tmx");
             tileset = Content.Load<Texture2D>(map.Tilesets[0].Name.ToString());
 
             tileWidth = map.Tilesets[0].TileWidth;
@@ -112,7 +112,7 @@ namespace GameDevProject
             hero.Draw(_spriteBatch);
 
 
-            //_spriteBatch.Draw(debugchar, hero.CollisionRectangle, Color.White);
+            _spriteBatch.Draw(debugchar, hero.CollisionRectangle, Color.White);
             _spriteBatch.End();
             //collisiondetect.checkwallsandplatforms(hero.CollisionRectangle);
 

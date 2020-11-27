@@ -17,7 +17,7 @@ namespace GameDevProject.Input
             if (keyState.IsKeyDown(Keys.Space)&& Hero.status != CharState.jumping)
             {
                 Hero.status = CharState.jumping;
-                transform.VerticalMovement = new Vector2(transform.VerticalMovement.X, -12f);
+                transform.VerticalMovement = new Vector2(transform.VerticalMovement.X, -16f);
             }
             
         }

@@ -38,11 +38,91 @@
 /processorParam:TextureFormat=Color
 /build:sprites/HeroRight.png
 
+#begin tilemap/decorations.tsx
+/copy:tilemap/decorations.tsx
+
+#begin tilemap/decorations.tsx
+/importer:
+/processor:
+/build:tilemap/decorations.tsx
+
+#begin tilemap/terrain.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:tilemap/terrain.png
+
+#begin tilemap/terrain.tsx
+/copy:tilemap/terrain.tsx
+
+#begin tilemap/terrain.tsx
+/importer:
+/processor:
+/build:tilemap/terrain.tsx
+
 #begin tilemap/test.tmx
 /copy:tilemap/test.tmx
 
+#begin tilemap/test.tmx
+/importer:
+/processor:
+/build:tilemap/test.tmx
+
+#begin tilemap/test.tmx
+/importer:
+/processor:
+/build:tilemap/test.tmx
+
+#begin tilemap/testfirstmap.tmx
+/copy:tilemap/testfirstmap.tmx
+
+#begin tilemap/testfirstmap.tmx
+/importer:
+/processor:
+/build:tilemap/testfirstmap.tmx
+
 #begin tilemap/tilesettest.tsx
 /copy:tilemap/tilesettest.tsx
+
+#begin tilemap/tilesettest.tsx
+/importer:
+/processor:
+/build:tilemap/tilesettest.tsx
+
+#begin tilemap/tilesettest.tsx
+/importer:
+/processor:
+/build:tilemap/tilesettest.tsx
+
+#begin tilemap/tilesettest.webp
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:tilemap/tilesettest.webp
+
+#begin tilemap/tilesettest.webp
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:tilemap/tilesettest.webp
 
 #begin tilemap/tilesettest.webp
 /importer:TextureImporter

@@ -3,6 +3,7 @@ using GameDevProject.Interfaces;
 using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Text;
 
 namespace GameDevProject.Command
@@ -48,7 +49,7 @@ namespace GameDevProject.Command
                 Hero.status = CharState.jumping;
                 transform.VerticalMovement = new Vector2(transform.VerticalMovement.X, 0f);
                 jumplock = false;
-                // vanaf er geen grond meer is begin te vallen
+                // vanaf er geen grond meer is begin te vallen (gravity)
             }
             else if (wallsandobjects.checkhead(future)&& Hero.status == CharState.jumping && transform.VerticalMovement.Y < 0)
             {
@@ -56,7 +57,19 @@ namespace GameDevProject.Command
                 transform.VerticalMovement = new Vector2(transform.VerticalMovement.X, 0f);
                 //tijdens het jumpen vanaf er iets het hoofd raak begin te vallen
             }
+            else if(wallsandobjects.checkwallsandplatforms(future) && Hero.status ==  CharState.jumping )
+            {
 
+                //Debug.WriteLine("Bottem: " + future.Bottom);
+                
+                transform.Position = new Vector2(transform.Position.X, (float)(wallsandobjects.SearchTopCollider(future)-transform.CollisionRectangle.Height));
+                Hero.status = CharState.idle;
+
+                //er wordt gecheckt op het smooth vallen van de player
+                // als de player valt en de volgende Y cords komen in een blok dan worden de Y cords gezet naar de blok top en de hoogte van de player wordt eraf gedaan
+                // zo maak je dat hij mooi valt op de blok en verder kan doen
+
+            }
             else if (!jumplock)
             {
                 Hero.status = CharState.idle;
