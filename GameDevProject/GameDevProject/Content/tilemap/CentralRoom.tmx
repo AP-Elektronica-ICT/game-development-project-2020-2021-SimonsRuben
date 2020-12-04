@@ -91,13 +91,13 @@
   <object id="22" x="352" y="384" width="128" height="32"/>
   <object id="24" x="352" y="192" width="160" height="32"/>
  </objectgroup>
- <objectgroup id="4" name="Doors" visible="0" locked="1">
+ <objectgroup id="4" name="Doors" locked="1">
   <object id="26" x="32" y="416" width="32" height="64"/>
   <object id="27" x="800" y="96" width="32" height="64"/>
   <object id="28" x="1504" y="416" width="32" height="64"/>
   <object id="29" x="640" y="864" width="32" height="64"/>
  </objectgroup>
- <objectgroup id="5" name="SpawnArea" visible="0" locked="1">
+ <objectgroup id="5" name="SpawnArea" locked="1">
   <object id="30" x="128" y="416" width="32" height="32"/>
   <object id="31" x="896" y="96" width="32" height="32"/>
   <object id="32" x="1408" y="416" width="32" height="32"/>

@@ -33,10 +33,13 @@ namespace GameDevProject.Command
             
         }
 
-        public void ExecuteVertical(ITransform transform, float ground)
+        public void ExecuteVertical(ITransform transform)
         {
             
             //Bron voor de jump code: http://flatformer.blogspot.com/2010/02/making-character-jump-in-xnac-basic.html
+
+
+            // berekenen van de toekomstige positie
             Rectangle future = new Rectangle((int)(transform.Position.X), (int)(transform.Position.Y + transform.VerticalMovement.Y), transform.CollisionRectangle.Width, transform.CollisionRectangle.Height);
             if (!wallsandobjects.checkwallsandplatforms(future)&& transform.VerticalMovement.X ==1)
             {
@@ -82,16 +85,7 @@ namespace GameDevProject.Command
             {
                 //Hero.status = CharState.idle;
                 jumplock = true;
-
             }
-            /*
-
-            if (transform.Position.Y >= ground)
-            //If it's farther than ground
-            {
-                transform.Position = new Vector2(transform.Position.X, ground);//Then set it on
-                Hero.status = CharState.run;
-            }*/
         }
 
     }

@@ -36,7 +36,6 @@ namespace GameDevProject
         }
 
         private Rectangle _CollisionRectangle;
-        float startY;
 
 
 
@@ -50,6 +49,8 @@ namespace GameDevProject
             status = CharState.idle;
             richting = LoopRichting.rechts;
             herotexture = textures;
+
+
             animations = new List<List<Animatie>>();
             heroanimations = new HeroAnimations();
             animations.Add(heroanimations.Idle());
@@ -61,9 +62,6 @@ namespace GameDevProject
             this.movecommand = new MoveCommand(objects);
 
             CollisionRectangle = new Rectangle((int)Position.X, (int)Position.Y, 50,60);
-
-
-            startY = Position.Y;//Starting position
 
         }
         public void Draw(SpriteBatch _spriteBatch)
@@ -83,12 +81,6 @@ namespace GameDevProject
             inputreader.ReadAttack();
             _CollisionRectangle.X = (int)Position.X;
             _CollisionRectangle.Y = (int)Position.Y;
-
-
-
-
-            
-
 
         }
 
@@ -125,15 +117,7 @@ namespace GameDevProject
         private void MoveVertical()
         {
             inputreader.IsJumping(this);
-            movecommand.ExecuteVertical(this, startY);/*
-            if (status == CharState.jumping)
-            {
-
-                movecommand.ExecuteVertical(this,startY);
-                
-            }*/
-            
-
+            movecommand.ExecuteVertical(this);   
         }
         private void MoveHorizontal(Vector2 _direction)
         {

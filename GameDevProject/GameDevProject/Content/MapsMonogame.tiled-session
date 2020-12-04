@@ -90,7 +90,7 @@
             "scale": 0.6612745098039216,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 784.8480355819127,
+                "x": 786.3602668643439,
                 "y": 480.889547813195
             }
         },
@@ -98,24 +98,24 @@
             "scale": 0.75,
             "selectedLayer": 2,
             "viewCenter": {
-                "x": 928,
-                "y": 534.6666666666665
+                "x": 722.6666666666666,
+                "y": 38.66666666666674
             }
         },
         "tilemap/EndingRoom.tmx": {
             "scale": 0.6612745098039216,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 784.8480355819127,
+                "x": 786.3602668643439,
                 "y": 480.889547813195
             }
         },
         "tilemap/StartRoom.tmx": {
-            "scale": 0.75,
+            "scale": 1.5,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 636,
-                "y": 454.6666666666666
+                "x": 742.6666666666667,
+                "y": 678.6666666666666
             }
         },
         "tilemap/Terrain (32x32).tsx": {
@@ -123,11 +123,11 @@
             "scaleInEditor": 1
         },
         "tilemap/TopRoom.tmx": {
-            "scale": 0.6612745098039216,
-            "selectedLayer": 0,
+            "scale": 0.5,
+            "selectedLayer": 2,
             "viewCenter": {
-                "x": 784.8480355819127,
-                "y": 480.889547813195
+                "x": 937,
+                "y": 504
             }
         },
         "tilemap/combine.tsx": {
@@ -182,15 +182,16 @@
         "tilemap/StartRoom.tmx",
         "tilemap/TopRoom.tmx",
         "tilemap/EndingRoom.tmx",
-        "tilemap/BottemRoom.tmx"
+        "tilemap/BottemRoom.tmx",
+        "tilemap/CentralRoom.tmx"
     ],
     "project": "MapsMonogame.tiled-project",
     "recentFiles": [
         "tilemap/StartRoom.tmx",
+        "tilemap/CentralRoom.tmx",
         "tilemap/BottemRoom.tmx",
         "tilemap/EndingRoom.tmx",
         "tilemap/TopRoom.tmx",
-        "tilemap/CentralRoom.tmx",
         "tilemap/combine.tsx",
         "tilemap/BeginRoom.tmx",
         "tilemap/terrain.tsx",

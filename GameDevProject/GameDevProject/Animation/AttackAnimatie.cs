@@ -29,7 +29,7 @@ namespace GameDevProject.Animation
         {
             base.CurrentFrame = frames[counter];
             framemovement += CurrentFrame.SourceRectangle.Width * Gametime.ElapsedGameTime.TotalSeconds;
-            if (framemovement >= CurrentFrame.SourceRectangle.Width / 7)// 7 is standaard
+            if (framemovement >= CurrentFrame.SourceRectangle.Width / 9)// 7 is standaard 9 is sneller
             {
                 counter++;
                 framemovement = 0;

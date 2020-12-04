@@ -71,7 +71,7 @@ namespace GameDevProject
         {
             //https://www.trccompsci.online/mediawiki/index.php/Using_a_tmx_map_in_monogame
             // the whole map is made with tiledsharp see above link for documentation
-            map = new TmxMap("Content/map/CentralRoom.tmx");
+            map = new TmxMap("Content/map/TopRoom.tmx");
             tileset = Content.Load<Texture2D>(map.Tilesets[0].Name.ToString());
 
             tileWidth = map.Tilesets[0].TileWidth;
@@ -112,16 +112,12 @@ namespace GameDevProject
             _spriteBatch.Begin();
 
             drawmap();
-            _spriteBatch.Draw(debugchar, hero.CollisionRectangle, Color.White);
+            //_spriteBatch.Draw(debugchar, hero.CollisionRectangle, Color.White);
             hero.Draw(_spriteBatch);
 
 
             
             _spriteBatch.End();
-            //collisiondetect.checkwallsandplatforms(hero.CollisionRectangle);
-
-            // TODO: Add your drawing code here
-
             base.Draw(gameTime);
         }
         private void drawmap()
