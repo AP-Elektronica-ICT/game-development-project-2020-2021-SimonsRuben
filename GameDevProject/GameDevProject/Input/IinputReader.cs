@@ -10,7 +10,7 @@ namespace GameDevProject.Input
     {
         Vector2 ReadLeftRight();
         void IsJumping(ITransform transform);
-        Vector2 ReadAttack();
+        void ReadAttack();
         
     }
 }

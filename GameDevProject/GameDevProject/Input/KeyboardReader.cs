@@ -3,6 +3,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Text;
 
 namespace GameDevProject.Input
@@ -14,17 +15,24 @@ namespace GameDevProject.Input
         {
             KeyboardState keyState = Keyboard.GetState();
             
-            if (keyState.IsKeyDown(Keys.Space)&& Hero.status != CharState.jumping)
+            if (keyState.IsKeyDown(Keys.Space)&& Hero.status != CharState.jumping && transform.VerticalMovement.X == 0 )
             {
-                Hero.status = CharState.jumping;
-                transform.VerticalMovement = new Vector2(transform.VerticalMovement.X, -12f);
+                
+                transform.VerticalMovement = new Vector2(1, -12f);
             }
             
         }
 
-        public Vector2 ReadAttack()
+        public void ReadAttack()
         {
-            throw new NotImplementedException();
+            KeyboardState keyState = Keyboard.GetState();
+            
+            if (keyState.IsKeyDown(Keys.X) && Hero.status != CharState.attack)
+            {
+                Hero.status = CharState.attack;
+                Debug.WriteLine("attack");
+            }
+            
         }
 
         

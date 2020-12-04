@@ -3,7 +3,7 @@
         "height": 4300,
         "width": 2
     },
-    "activeFile": "tilemap/StartRoom.tmx",
+    "activeFile": "tilemap/TopRoom.tmx",
     "expandedProjectPaths": [
         "tilemap",
         "C:/Users/Ruben Simons/Desktop/game-development-project-2020-2021-SimonsRuben/GameDevProject/GameDevProject/Maps/begin map"
@@ -86,20 +86,52 @@
                 "y": 474.6666666666666
             }
         },
-        "tilemap/StartRoom.tmx": {
-            "scale": 0.5,
+        "tilemap/BottemRoom.tmx": {
+            "scale": 0.6612745098039216,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 784.8480355819127,
+                "y": 480.889547813195
+            }
+        },
+        "tilemap/CentralRoom.tmx": {
+            "scale": 0.75,
             "selectedLayer": 2,
             "viewCenter": {
-                "x": 1090,
-                "y": 620
+                "x": 928,
+                "y": 534.6666666666665
+            }
+        },
+        "tilemap/EndingRoom.tmx": {
+            "scale": 0.6612745098039216,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 784.8480355819127,
+                "y": 480.889547813195
+            }
+        },
+        "tilemap/StartRoom.tmx": {
+            "scale": 0.75,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 636,
+                "y": 454.6666666666666
             }
         },
         "tilemap/Terrain (32x32).tsx": {
             "scaleInDock": 1,
             "scaleInEditor": 1
         },
+        "tilemap/TopRoom.tmx": {
+            "scale": 0.6612745098039216,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 784.8480355819127,
+                "y": 480.889547813195
+            }
+        },
         "tilemap/combine.tsx": {
-            "scaleInDock": 0.33,
+            "scaleInDock": 0.75,
             "scaleInEditor": 2
         },
         "tilemap/decorations.tsx": {
@@ -147,24 +179,25 @@
     "map.renderOrder": null,
     "map.width": 50,
     "openFiles": [
-        "tilemap/combine.tsx",
         "tilemap/StartRoom.tmx",
-        "tilemap/BeginRoom.tmx"
+        "tilemap/TopRoom.tmx",
+        "tilemap/EndingRoom.tmx",
+        "tilemap/BottemRoom.tmx"
     ],
     "project": "MapsMonogame.tiled-project",
     "recentFiles": [
+        "tilemap/StartRoom.tmx",
+        "tilemap/BottemRoom.tmx",
+        "tilemap/EndingRoom.tmx",
+        "tilemap/TopRoom.tmx",
+        "tilemap/CentralRoom.tmx",
         "tilemap/combine.tsx",
         "tilemap/BeginRoom.tmx",
-        "tilemap/StartRoom.tmx",
         "tilemap/terrain.tsx",
         "tilemap/decorations.tsx",
         "tilemap/testfirstmap.tmx",
         "C:/Users/Ruben Simons/Desktop/game-development-project-2020-2021-SimonsRuben/GameDevProject/GameDevProject/Maps/begin map/testfirstmap.tmx",
-        "C:/Users/Ruben Simons/Desktop/game-development-project-2020-2021-SimonsRuben/GameDevProject/GameDevProject/Maps/begin map/decorations.tsx",
-        "C:/Users/Ruben Simons/Desktop/game-development-project-2020-2021-SimonsRuben/GameDevProject/GameDevProject/Maps/begin map/terrain.tsx",
-        "C:/Users/Ruben Simons/Desktop/game-development-project-2020-2021-SimonsRuben/GameDevProject/GameDevProject/Maps/begin map/tilemap.tsx",
-        "tilemap/test.tmx",
-        "tilemap/tilesettest.tsx"
+        "C:/Users/Ruben Simons/Desktop/game-development-project-2020-2021-SimonsRuben/GameDevProject/GameDevProject/Maps/begin map/decorations.tsx"
     ],
     "tileset.lastUsedFilter": "Tiled tileset bestanden (*.tsx *.xml)",
     "tileset.lastUsedFormat": "tsx"

@@ -71,7 +71,7 @@ namespace GameDevProject
         {
             //https://www.trccompsci.online/mediawiki/index.php/Using_a_tmx_map_in_monogame
             // the whole map is made with tiledsharp see above link for documentation
-            map = new TmxMap("Content/map/StartRoom.tmx");
+            map = new TmxMap("Content/map/CentralRoom.tmx");
             tileset = Content.Load<Texture2D>(map.Tilesets[0].Name.ToString());
 
             tileWidth = map.Tilesets[0].TileWidth;
@@ -85,6 +85,8 @@ namespace GameDevProject
                 collisions.Add(new Rectangle((int)o.X, (int)o.Y, (int)o.Width, (int)o.Height));
             }
             collisiondetect = new CollisionDetection(collisions);
+
+
             
                 
         }
@@ -108,11 +110,13 @@ namespace GameDevProject
 
             */
             _spriteBatch.Begin();
+
             drawmap();
+            _spriteBatch.Draw(debugchar, hero.CollisionRectangle, Color.White);
             hero.Draw(_spriteBatch);
 
 
-            //_spriteBatch.Draw(debugchar, hero.CollisionRectangle, Color.White);
+            
             _spriteBatch.End();
             //collisiondetect.checkwallsandplatforms(hero.CollisionRectangle);
 

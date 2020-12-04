@@ -28,11 +28,23 @@ namespace GameDevProject.Animation.AnimationCreators
 
         public Animatie CreateLeftAttack()
         {
-            throw new NotImplementedException();
+            Animatie AttackL = new AttackAnimatie();
+            AttackL.AddFrame(new AnimationFrame(new Rectangle(660, 531, 100, width)));
+            AttackL.AddFrame(new AnimationFrame(new Rectangle(566, 531, 100, 78)));
+            AttackL.AddFrame(new AnimationFrame(new Rectangle(470, 531, 90, 70)));
+            AttackL.AddFrame(new AnimationFrame(new Rectangle(370, 531, 90, 70)));
+            return AttackL;
         }
         public Animatie CreateRightAttack()
         {
-            throw new NotImplementedException();
+            Animatie AttackR = new AttackAnimatie();
+           
+            AttackR.AddFrame(new AnimationFrame(new Rectangle(22, 530, height, width)));
+            AttackR.AddFrame(new AnimationFrame(new Rectangle(118, 530, 78, 78)));
+            AttackR.AddFrame(new AnimationFrame(new Rectangle(204, 530, 101, 60)));
+            AttackR.AddFrame(new AnimationFrame(new Rectangle(304, 530, 90, 60)));
+           
+            return AttackR;
         }
 
         public Animatie CreateLeftIdle()
@@ -86,7 +98,8 @@ namespace GameDevProject.Animation.AnimationCreators
             List<Animatie> Attack = new List<Animatie>();
             Attack.Add(CreateLeftAttack());
             Attack.Add(CreateRightAttack());
-            throw new NotImplementedException();
+            return Attack;
+            
         }
 
         public List<Animatie> Idle()

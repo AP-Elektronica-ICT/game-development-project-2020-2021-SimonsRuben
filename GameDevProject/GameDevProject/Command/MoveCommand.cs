@@ -35,35 +35,43 @@ namespace GameDevProject.Command
 
         public void ExecuteVertical(ITransform transform, float ground)
         {
+            
             //Bron voor de jump code: http://flatformer.blogspot.com/2010/02/making-character-jump-in-xnac-basic.html
             Rectangle future = new Rectangle((int)(transform.Position.X), (int)(transform.Position.Y + transform.VerticalMovement.Y), transform.CollisionRectangle.Width, transform.CollisionRectangle.Height);
-            if (!wallsandobjects.checkwallsandplatforms(future)&& Hero.status == CharState.jumping)
+            if (!wallsandobjects.checkwallsandplatforms(future)&& transform.VerticalMovement.X ==1)
             {
                 transform.Position += new Vector2(0, transform.VerticalMovement.Y);//Making it go up
                 transform.VerticalMovement = new Vector2(transform.VerticalMovement.X, transform.VerticalMovement.Y + 0.4f);
                 jumplock = false;
+
+
                 //gewoone jump zonder iets te raken
             }
-            else if (Hero.status !=CharState.jumping && !wallsandobjects.checkwallsandplatforms(future))
+            else if (transform.VerticalMovement.X == 0 && !wallsandobjects.checkwallsandplatforms(future))
             {
-                Hero.status = CharState.jumping;
-                transform.VerticalMovement = new Vector2(transform.VerticalMovement.X, 0f);
+                //Hero.status = CharState.jumping;
+                transform.VerticalMovement = new Vector2(1, 0f);
                 jumplock = false;
+
+
                 // vanaf er geen grond meer is begin te vallen (gravity)
             }
-            else if (wallsandobjects.checkhead(future)&& Hero.status == CharState.jumping && transform.VerticalMovement.Y < 0)
+            else if (wallsandobjects.checkhead(future)&& transform.VerticalMovement.X == 1 && transform.VerticalMovement.Y < 0)
             {
                 transform.Position -= new Vector2(0, transform.VerticalMovement.Y);
                 transform.VerticalMovement = new Vector2(transform.VerticalMovement.X, 0f);
+
+
                 //tijdens het jumpen vanaf er iets het hoofd raak begin te vallen
             }
-            else if(wallsandobjects.checkwallsandplatforms(future) && Hero.status ==  CharState.jumping )
+            else if(wallsandobjects.checkwallsandplatforms(future) && transform.VerticalMovement.X ==1 )
             {
 
-                //Debug.WriteLine("Bottem: " + future.Bottom);
                 
+                //Hero.status = CharState.idle;
                 transform.Position = new Vector2(transform.Position.X, (float)(wallsandobjects.SearchTopCollider(future)-transform.CollisionRectangle.Height));
-                Hero.status = CharState.idle;
+                transform.VerticalMovement = new Vector2(0, transform.VerticalMovement.Y);
+                
 
                 //er wordt gecheckt op het smooth vallen van de player
                 // als de player valt en de volgende Y cords komen in een blok dan worden de Y cords gezet naar de blok top en de hoogte van de player wordt eraf gedaan
@@ -72,8 +80,9 @@ namespace GameDevProject.Command
             }
             else if (!jumplock)
             {
-                Hero.status = CharState.idle;
+                //Hero.status = CharState.idle;
                 jumplock = true;
+
             }
             /*
 

@@ -45,7 +45,7 @@ namespace GameDevProject
         public Hero(List<Texture2D> textures,CollisionDetection objects)
         {
             Position = new Vector2(600, 400);
-            VerticalMovement = new Vector2(0, 0);// X: -1 => naar beneden 0 => stil 1=>naar boven    Y: current jump speed
+            VerticalMovement = new Vector2(0, 0);// X: verticalmovement => 1 = ja          0= nee    Y: current jump speed
             HorizontalMovement = new Vector2(0, 4);// X: richting -1 => links 0=> stil 1=> rechts    Y: Current movespeed
             status = CharState.idle;
             richting = LoopRichting.rechts;
@@ -54,9 +54,9 @@ namespace GameDevProject
             heroanimations = new HeroAnimations();
             animations.Add(heroanimations.Idle());
             animations.Add(heroanimations.Run());
-            animations.Add(heroanimations.Idle());
+            animations.Add(heroanimations.Attack());
             animations.Add(heroanimations.Jump());
-            //animations.Add(heroanimations.Attack());animaties nog toevoegen
+            
             this.inputreader = new KeyboardReader();
             this.movecommand = new MoveCommand(objects);
 
@@ -80,6 +80,7 @@ namespace GameDevProject
             UpdateAnimations(gametime);
             MoveHorizontal(inputreader.ReadLeftRight());
             MoveVertical();
+            inputreader.ReadAttack();
             _CollisionRectangle.X = (int)Position.X;
             _CollisionRectangle.Y = (int)Position.Y;
 
@@ -93,16 +94,26 @@ namespace GameDevProject
 
         private void StatePicker()
         {
-            if (status != CharState.jumping)
+            if (status != CharState.attack)
             {
-                if (HorizontalMovement.X != 0)
+              
+                if (this.VerticalMovement.X == 1 )
                 {
-                    status = CharState.run;
+                    status = CharState.jumping;
                 }
                 else
                 {
-                    status = CharState.idle;
+                    if (this.HorizontalMovement.X != 0)
+                    {
+                        status = CharState.run;
+                    }
+                    else
+                    {
+                        status = CharState.idle;
+                    }
+
                 }
+                
             }
         }
         private void UpdateAnimations(GameTime gametime)
