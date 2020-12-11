@@ -30,7 +30,7 @@ namespace GameDevProject.Detections
             return false;
         }
 
-        private bool CheckCollision(Rectangle entity1, Rectangle entity2)
+        public static bool CheckCollision(Rectangle entity1, Rectangle entity2)
         {
             if (entity1.Intersects(entity2))
             {

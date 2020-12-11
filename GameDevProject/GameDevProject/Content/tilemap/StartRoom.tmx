@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.4" tiledversion="1.4.2" orientation="orthogonal" renderorder="right-down" width="50" height="30" tilewidth="32" tileheight="32" infinite="0" nextlayerid="6" nextobjectid="36">
+<map version="1.4" tiledversion="1.4.2" orientation="orthogonal" renderorder="right-down" width="50" height="30" tilewidth="32" tileheight="32" infinite="0" nextlayerid="6" nextobjectid="37">
  <tileset firstgid="1" source="combine.tsx"/>
  <layer id="1" name="background" width="50" height="30" locked="1">
   <data encoding="csv">
@@ -35,7 +35,7 @@
 236,237,237,237,237,237,237,237,237,237,237,237,237,237,237,237,237,237,237,237,237,237,237,237,237,237,237,237,237,237,237,237,237,237,237,237,237,237,237,237,237,237,237,237,237,237,237,237,237,238
 </data>
  </layer>
- <layer id="2" name="platformandobjects" width="50" height="30">
+ <layer id="2" name="platformandobjects" width="50" height="30" locked="1">
   <data encoding="csv">
 121,133,133,133,133,133,113,112,133,133,133,133,133,133,133,133,133,133,133,133,133,133,133,133,133,133,133,133,133,133,133,133,133,133,133,133,133,133,133,133,133,133,133,133,133,133,133,133,133,122,
 58,0,0,102,103,0,115,116,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,58,
@@ -69,7 +69,7 @@
 55,60,61,60,61,60,61,60,61,60,61,64,133,133,133,133,133,133,133,133,133,133,133,133,37,55,55,55,55,55,55,64,133,133,133,133,133,133,133,133,133,133,133,133,133,133,133,133,133,148
 </data>
  </layer>
- <objectgroup id="3" name="collisions">
+ <objectgroup id="3" name="Collisions" locked="1">
   <object id="21" x="1568" y="0" width="32" height="960"/>
   <object id="22" x="0" y="0" width="1568" height="32"/>
   <object id="23" x="0" y="32" width="32" height="736"/>
@@ -90,5 +90,6 @@
  </objectgroup>
  <objectgroup id="5" name="SpawnArea" locked="1">
   <object id="18" x="96" y="96" width="32" height="64"/>
+  <object id="36" x="1344" y="384" width="32" height="32"/>
  </objectgroup>
 </map>

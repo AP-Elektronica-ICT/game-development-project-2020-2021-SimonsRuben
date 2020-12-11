@@ -43,7 +43,7 @@ namespace GameDevProject
 
         public Hero(List<Texture2D> textures,CollisionDetection objects)
         {
-            Position = new Vector2(600, 400);
+            Position = new Vector2(400, 400);
             VerticalMovement = new Vector2(0, 0);// X: verticalmovement => 1 = ja          0= nee    Y: current jump speed
             HorizontalMovement = new Vector2(0, 4);// X: richting -1 => links 0=> stil 1=> rechts    Y: Current movespeed
             status = CharState.idle;
@@ -63,6 +63,10 @@ namespace GameDevProject
 
             CollisionRectangle = new Rectangle((int)Position.X, (int)Position.Y, 50,60);
 
+        }
+        public void Spawn(Vector2 pos)
+        {
+            this.Position = pos;
         }
         public void Draw(SpriteBatch _spriteBatch)
         {

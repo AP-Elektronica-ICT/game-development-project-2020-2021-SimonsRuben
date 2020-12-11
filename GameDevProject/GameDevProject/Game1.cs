@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using TiledSharp;
 using System.Diagnostics;
 using GameDevProject.Detections;
+using GameDevProject.World;
 
 namespace GameDevProject
 {
@@ -22,12 +23,14 @@ namespace GameDevProject
 
         TmxMap map;
         Texture2D tileset;
-        int tileWidth;
-        int tileHeight;
-        int tilesetTilesWide;
-        int tilesetTilesHigh;
-        List<Rectangle> collisions = new List<Rectangle>();
 
+        string[] AllRooms = { "StartRoom", "CentralRoom", "BottemRoom", "TopRoom", "EndingRoom" };
+        
+
+
+
+
+        Wereld wereld;
         public Game1()
         {
             _graphics = new GraphicsDeviceManager(this);
@@ -56,8 +59,9 @@ namespace GameDevProject
             debugchar.SetData(new Color[] { Color.DarkSlateGray });
 
 
+            wereld = new Wereld(loadmapcontent());
             loadmapcontent();
-
+            collisiondetect = new CollisionDetection(wereld.ActiveRoom.GetCollisions());
             InitializeGameObject();
 
             // TODO: use this.Content to load your game content here
@@ -65,30 +69,23 @@ namespace GameDevProject
         private void InitializeGameObject()
         {
             hero = new Hero(Herotextures,collisiondetect);
+            hero.Spawn(wereld.ActiveRoom.GetSpawn());
         }
 
-        private void loadmapcontent()
+
+        private List<Room> loadmapcontent()
         {
             //https://www.trccompsci.online/mediawiki/index.php/Using_a_tmx_map_in_monogame
             // the whole map is made with tiledsharp see above link for documentation
-            map = new TmxMap("Content/map/BottemRoom.tmx");
-            tileset = Content.Load<Texture2D>(map.Tilesets[0].Name.ToString());
 
-            tileWidth = map.Tilesets[0].TileWidth;
-            tileHeight = map.Tilesets[0].TileHeight;
-
-            tilesetTilesWide = tileset.Width / tileWidth;
-            tilesetTilesHigh = tileset.Height / tileHeight;
-
-            foreach (var o in map.ObjectGroups[0].Objects)
+            List<Room> world = new List<Room>();
+            foreach (string room in AllRooms)
             {
-                collisions.Add(new Rectangle((int)o.X, (int)o.Y, (int)o.Width, (int)o.Height));
+                map = new TmxMap("Content/map/" + room + ".tmx");
+                tileset = Content.Load<Texture2D>(map.Tilesets[0].Name.ToString());
+                world.Add(new Room(map, tileset));
             }
-            collisiondetect = new CollisionDetection(collisions);
-
-
-            
-                
+            return world;
         }
         protected override void Update(GameTime gameTime)
         {
@@ -97,7 +94,11 @@ namespace GameDevProject
 
             // TODO: Add your update logic here
             hero.Update(gameTime);
+            collisiondetect.walls = wereld.ActiveRoom.GetCollisions();
 
+            wereld.Update(hero);
+
+            
             base.Update(gameTime);
         }
 
@@ -110,8 +111,7 @@ namespace GameDevProject
 
             */
             _spriteBatch.Begin();
-
-            drawmap();
+            wereld.ActiveRoom.Draw(_spriteBatch);
             //_spriteBatch.Draw(debugchar, hero.CollisionRectangle, Color.White);
             hero.Draw(_spriteBatch);
 
@@ -120,36 +120,6 @@ namespace GameDevProject
             _spriteBatch.End();
             base.Draw(gameTime);
         }
-        private void drawmap()
-        {
-            for (int ji = 0; ji < map.Layers.Count; ji++)
-            {
-                
-                for (var i = 0; i < map.Layers[ji].Tiles.Count; i++)
-                {
-                    int gid = map.Layers[ji].Tiles[i].Gid;
-
-                    // Empty tile, do nothing
-                    if (gid == 0)
-                    {
-
-                    }
-                    else
-                    {
-                        int tileFrame = gid - 1;
-                        int column = tileFrame % tilesetTilesWide;
-                        int row = (int)Math.Floor((double)tileFrame / (double)tilesetTilesWide);
-
-                        float x = (i % map.Width) * map.TileWidth;
-                        float y = (float)Math.Floor(i / (double)map.Width) * map.TileHeight;
-
-                        Rectangle tilesetRec = new Rectangle(tileWidth * column, tileHeight * row, tileWidth, tileHeight);
-
-                        _spriteBatch.Draw(tileset, new Rectangle((int)x, (int)y, tileWidth, tileHeight), tilesetRec, Color.White);
-                    }
-                }
-            }
-            
-        }
+        
     }
 }
