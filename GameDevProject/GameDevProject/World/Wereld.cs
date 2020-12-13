@@ -11,9 +11,11 @@ namespace GameDevProject.World
 {
     class Wereld
     {
-        List<Room> world = new List<Room>();
+        List<Room> Rooms = new List<Room>();
 
-        int currroom = 0;
+        private Vector2 cords;
+
+        private Room[,] world;
 
         private Room _activeRoom;
 
@@ -21,7 +23,7 @@ namespace GameDevProject.World
         {
             get 
             {
-                _activeRoom = world[currroom];
+                _activeRoom = world[(int)cords.Y,(int)cords.X];// Y is welke Rij het is en X is de Colom
                 return _activeRoom; 
             }
             set 
@@ -33,11 +35,23 @@ namespace GameDevProject.World
 
         public Wereld(List<Room> w)
         {
-            this.world = w;
+            this.Rooms = w;
+            world = new Room[,] { 
+                { null,Rooms[3],null },
+                { Rooms[0],Rooms[1],Rooms[4]  },
+                { null,Rooms[2],null } };
 
+
+            cords = new Vector2(0, 1);//
         }
 
         public void Update(Hero hero)
+        {
+            UpdateRoom(hero);
+            
+        }
+
+        private void UpdateRoom(Hero hero)
         {
             int PickedDoor = CheckDoors(hero);
             if (PickedDoor != -1)
@@ -47,15 +61,28 @@ namespace GameDevProject.World
                 {
                     Spawn = PickedDoor + 2;
                 }
-                else if (PickedDoor /2 >= 1)
+                else if (PickedDoor / 2 >= 1)
                 {
                     Spawn = PickedDoor - 2;
                 }
-                Debug.WriteLine((side)PickedDoor);
-                currroom++;
+
+                int NextRoom = 1;
+                if (PickedDoor % 3 == 0)
+                {
+                    NextRoom = -1;
+                }
+
+                if (PickedDoor % 2 == 0)
+                {
+                    cords.Y += NextRoom;
+                }
+                else
+                {
+                    cords.X += NextRoom;
+                }
+                //Debug.WriteLine((side)PickedDoor);
                 hero.Spawn(ActiveRoom.SpawnAreas[Spawn]);
             }
-            
         }
         private int CheckDoors(Hero hero)
         {
