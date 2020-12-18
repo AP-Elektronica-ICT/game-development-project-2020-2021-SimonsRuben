@@ -8,6 +8,7 @@ namespace GameDevProject.Interfaces
 {
     interface IGameObject
     {
+
         void Update(GameTime gametime);
         void Draw(SpriteBatch spritebatch);
     }

@@ -16,8 +16,11 @@ namespace GameDevProject
 {
     public enum LoopRichting { links, rechts };
     public enum CharState { idle,run,attack,jumping};
-    class Hero : IGameObject, ITransform
+    class Hero : IGameObject, ITransform, IEntity
     {
+        public const int height = 60;
+        public const int Width = 50;
+
         
         HeroAnimations heroanimations;
         List<Texture2D> herotexture;
@@ -61,7 +64,7 @@ namespace GameDevProject
             this.inputreader = new KeyboardReader();
             this.movecommand = new MoveCommand(objects);
 
-            CollisionRectangle = new Rectangle((int)Position.X, (int)Position.Y, 50,60);
+            CollisionRectangle = new Rectangle((int)Position.X, (int)Position.Y, Hero.Width, Hero.height);
 
         }
         public void Spawn(Vector2 pos)

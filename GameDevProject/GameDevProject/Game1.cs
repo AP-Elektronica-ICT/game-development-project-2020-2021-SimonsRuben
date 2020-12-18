@@ -7,6 +7,7 @@ using TiledSharp;
 using System.Diagnostics;
 using GameDevProject.Detections;
 using GameDevProject.World;
+using GameDevProject.Entities;
 
 namespace GameDevProject
 {
@@ -18,7 +19,8 @@ namespace GameDevProject
         Hero hero;
         CollisionDetection collisiondetect;
 
-
+        Spearman spearman;
+        List<Texture2D> SpearMantextures;
         Texture2D debugchar;
 
         TmxMap map;
@@ -51,14 +53,11 @@ namespace GameDevProject
         protected override void LoadContent()
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
-            Herotextures = new List<Texture2D>();
-            Herotextures.Add(Content.Load<Texture2D>("Hero/HeroLeft"));
-            Herotextures.Add(Content.Load<Texture2D>("Hero/HeroRight"));
-
-            debugchar = new Texture2D(GraphicsDevice, 1, 1);
-            debugchar.SetData(new Color[] { Color.DarkSlateGray });
 
 
+
+
+            LoadSprites();
             wereld = new Wereld(loadmapcontent());
             loadmapcontent();
             collisiondetect = new CollisionDetection(wereld.ActiveRoom.GetCollisions());
@@ -66,10 +65,27 @@ namespace GameDevProject
 
             // TODO: use this.Content to load your game content here
         }
+        private void LoadSprites()
+        {
+            Herotextures = new List<Texture2D>();
+            Herotextures.Add(Content.Load<Texture2D>("Sprites/HeroLeft"));
+            Herotextures.Add(Content.Load<Texture2D>("Sprites/HeroRight"));
+
+            debugchar = new Texture2D(GraphicsDevice, 1, 1);
+            debugchar.SetData(new Color[] { Color.DarkSlateGray });
+
+
+            SpearMantextures = new List<Texture2D>();
+            SpearMantextures.Add(Content.Load<Texture2D>("Sprites/SpearManLeft"));
+            SpearMantextures.Add(Content.Load<Texture2D>("Sprites/SpearManRight"));
+        }
         private void InitializeGameObject()
         {
             hero = new Hero(Herotextures,collisiondetect);
             hero.Spawn(wereld.ActiveRoom.GetSpawn());
+
+            spearman = new Spearman(SpearMantextures, collisiondetect);
+            spearman.Spawn(wereld.ActiveRoom.GetSpawn());
         }
 
 
@@ -94,10 +110,12 @@ namespace GameDevProject
 
             // TODO: Add your update logic here
             hero.Update(gameTime);
+            spearman.Update(gameTime);
             collisiondetect.walls = wereld.ActiveRoom.GetCollisions();
 
             wereld.Update(hero);
 
+            spearman.Spawn(hero.Position);
             
             base.Update(gameTime);
         }
@@ -113,6 +131,10 @@ namespace GameDevProject
             _spriteBatch.Begin();
             wereld.ActiveRoom.Draw(_spriteBatch);
             //_spriteBatch.Draw(debugchar, hero.CollisionRectangle, Color.White);
+
+
+
+            spearman.Draw(_spriteBatch);
             hero.Draw(_spriteBatch);
 
 

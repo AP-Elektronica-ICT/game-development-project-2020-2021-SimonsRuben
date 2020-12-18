@@ -7,8 +7,8 @@ namespace GameDevProject.Animation.AnimationCreators
 {
     class HeroAnimations : IAnimation,IjumpingAnimation
     {
-        private int height = 50;
-        private int width = 60;
+        private int height = Hero.Width;
+        private int width = Hero.height;
         public Animatie CreateAnimation(string animatie)
         {
             //Factory
