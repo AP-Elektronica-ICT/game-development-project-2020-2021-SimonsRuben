@@ -10,14 +10,19 @@ namespace GameDevProject.Input
 {
     class KeyboardReader : IinputReader
     {
+        private ITransform player;
+        public KeyboardReader(ITransform transformobject)
+        {
+            this.player = transformobject;
+        }
         
-        public void IsJumping(ITransform transform)
+        public void IsJumping()
         {
             KeyboardState keyState = Keyboard.GetState();
             
-            if (keyState.IsKeyDown(Keys.Space)&& Hero.status != CharState.jumping && transform.VerticalMovement.X == 0 )
+            if (keyState.IsKeyDown(Keys.Space)&& player.status != CharState.jumping && player.VerticalMovement.X == 0 )
             {
-                transform.VerticalMovement = new Vector2(1, -12f);
+                player.VerticalMovement = new Vector2(1, -12f);
             }
             
         }
@@ -26,9 +31,9 @@ namespace GameDevProject.Input
         {
             KeyboardState keyState = Keyboard.GetState();
             
-            if (keyState.IsKeyDown(Keys.X) && Hero.status != CharState.attack)
+            if (keyState.IsKeyDown(Keys.X) && player.status != CharState.attack)
             {
-                Hero.status = CharState.attack;
+                player.status = CharState.attack;
                 Debug.WriteLine("attack");
             }
             
@@ -39,7 +44,7 @@ namespace GameDevProject.Input
         public Vector2 ReadLeftRight()
         {
             
-            var direction = new Vector2();
+            Vector2 direction = new Vector2();
             KeyboardState keyboardState = Keyboard.GetState();
 
             if (keyboardState.IsKeyDown(Keys.Left))

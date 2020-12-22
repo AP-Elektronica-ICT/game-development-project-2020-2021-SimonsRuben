@@ -1,35 +1,27 @@
-﻿using Microsoft.Xna.Framework.Graphics;
+﻿using GameDevProject.Animation;
+using GameDevProject.Animation.AnimationCreators;
+using GameDevProject.Command;
+using GameDevProject.Detections;
+using GameDevProject.Input;
+using GameDevProject.Interfaces;
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
 using System.Text;
-using GameDevProject.Animation;
-using Microsoft.Xna.Framework;
-using GameDevProject.Animation.AnimationCreators;
-using GameDevProject.Input;
-using GameDevProject.Command;
-using GameDevProject.Interfaces;
-using System.Diagnostics;
-using Microsoft.Xna.Framework.Input;
-using GameDevProject.Detections;
 
-namespace GameDevProject 
+namespace GameDevProject.Entities
 {
-    public enum LoopRichting { links, rechts };
-    public enum CharState { idle,run,attack,jumping};
-    class Hero : IGameObject, ITransform
+    abstract class Enemy : IGameObject, ITransform
     {
-        public const int height = 60;
-        public const int Width = 50;
-
-        
-        HeroAnimations heroanimations;
-        List<Texture2D> herotexture;
+        SpearManAnimations spearmanAnimations;
+        List<Texture2D> texture;
         List<List<Animatie>> animations;
-        public LoopRichting richting { get ; set; }
         public CharState status { get; set; }
-
-        private IinputReader inputreader;
+        public LoopRichting richting { get; set; }
+        private AIReader inputreader;
         private IGameCommand movecommand;
+
         public Vector2 Position { get; set; }
         public Vector2 HorizontalMovement { get; set; }
         public Vector2 VerticalMovement { get; set; }
@@ -39,69 +31,70 @@ namespace GameDevProject
             set { _CollisionRectangle = value; }
         }
 
-        public Vector2 AttackRange { get ; set; }
+        public Vector2 AttackRange { get; set; }
 
         private Rectangle _CollisionRectangle;
 
 
-
-
-
-        public Hero(List<Texture2D> textures,CollisionDetection objects)
+        public Enemy(List<Texture2D> textures, CollisionDetection objects, AIReader AiInputReader)
         {
             //basic information of entity
-            Position = new Vector2(400, 400);
+            Position = new Vector2(100, 100);
             VerticalMovement = new Vector2(0, 0);// X: verticalmovement => 1 = ja          0= nee    Y: current jump speed
-            HorizontalMovement = new Vector2(0, 4);// X: richting -1 => links 0=> stil 1=> rechts    Y: Current movespeed
+            HorizontalMovement = new Vector2(0, 2);// X: richting -1 => links 0=> stil 1=> rechts    Y: Current movespeed
             status = CharState.idle;
-            richting = LoopRichting.rechts;
-            herotexture = textures;
+            richting = LoopRichting.links;
+            texture = textures;
             this.AttackRange = new Vector2(60, 60);
 
             //animations
             animations = new List<List<Animatie>>();
-            heroanimations = new HeroAnimations();
-            animations.Add(heroanimations.Idle());
-            animations.Add(heroanimations.Run());
-            animations.Add(heroanimations.Attack());
-            animations.Add(heroanimations.Jump());
+            spearmanAnimations = new SpearManAnimations();
+            animations.Add(spearmanAnimations.Idle());
+            animations.Add(spearmanAnimations.Run());
+            animations.Add(spearmanAnimations.Attack());
+            animations.Add(spearmanAnimations.Jump());
 
             //movement and input
-            this.inputreader = new KeyboardReader(this);
+            this.inputreader = AiInputReader;
+            this.inputreader.SetEntity(this);
             this.movecommand = new MoveCommand(objects);
-            CollisionRectangle = new Rectangle((int)Position.X, (int)Position.Y, Hero.Width, Hero.height);
+            CollisionRectangle = new Rectangle((int)Position.X, (int)Position.Y, Spearman.Width - 20, Spearman.height);//-20 offset
 
         }
         public void Spawn(Vector2 pos)
         {
             this.Position = pos;
         }
-        public void Draw(SpriteBatch _spriteBatch)
+
+        public void Draw(SpriteBatch spritebatch)
         {
-            
-            _spriteBatch.Draw(herotexture[(int)richting], Position, animations[(int)status][(int)richting].CurrentFrame.SourceRectangle, Color.White);
-            
+            spritebatch.Draw(texture[(int)richting], Position, animations[(int)status][(int)richting].CurrentFrame.SourceRectangle, Color.White);
+
         }
 
         public void Update(GameTime gametime)
         {
-            
             StatePicker();
             UpdateAnimations(gametime);
             MoveHorizontal(inputreader.ReadLeftRight());
             MoveVertical();
             inputreader.ReadAttack();
+
             _CollisionRectangle.X = (int)Position.X;
             _CollisionRectangle.Y = (int)Position.Y;
-
         }
 
+        private void UpdateAnimations(GameTime gametime)
+        {
+            animations[(int)status][(int)richting].update(gametime, this);
+        }
         private void StatePicker()
         {
             if (status != CharState.attack)
             {
-              
-                if (this.VerticalMovement.X == 1 )
+
+                if (this.VerticalMovement.X == 1)
                 {
                     status = CharState.jumping;
                 }
@@ -117,32 +110,26 @@ namespace GameDevProject
                     }
 
                 }
-                
+
             }
         }
-        private void UpdateAnimations(GameTime gametime)
-        {
-            animations[(int)status][(int)richting].update(gametime,this);
-        }
-
-
         private void MoveVertical()
         {
             inputreader.IsJumping();
-            movecommand.ExecuteVertical(this);   
+            movecommand.ExecuteVertical(this);
         }
         private void MoveHorizontal(Vector2 _direction)
         {
             HorizontalMovement = new Vector2(_direction.X, HorizontalMovement.Y);
-            
-                if (_direction.X > 0)
-                {
-                    this.richting = LoopRichting.rechts;
-                }
-                else if (_direction.X < 0)
-                {
-                    this.richting = LoopRichting.links;
-                }
+
+            if (_direction.X > 0)
+            {
+                this.richting = LoopRichting.rechts;
+            }
+            else if (_direction.X < 0)
+            {
+                this.richting = LoopRichting.links;
+            }
 
             movecommand.ExecuteHorizontal(this, _direction);
         }

@@ -9,7 +9,7 @@ namespace GameDevProject.Input
     interface IinputReader
     {
         Vector2 ReadLeftRight();
-        void IsJumping(ITransform transform);
+        void IsJumping();
         void ReadAttack();
         
     }

@@ -38,7 +38,7 @@ namespace GameDevProject.Animation
             if (counter >= frames.Count)
             {
                 counter = 0;
-                Hero.status = CharState.idle;
+                entity.status = CharState.idle;
             }
 
         }

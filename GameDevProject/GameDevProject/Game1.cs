@@ -8,6 +8,7 @@ using System.Diagnostics;
 using GameDevProject.Detections;
 using GameDevProject.World;
 using GameDevProject.Entities;
+using GameDevProject.Input;
 
 namespace GameDevProject
 {
@@ -27,8 +28,12 @@ namespace GameDevProject
         Texture2D tileset;
 
         string[] AllRooms = { "StartRoom", "CentralRoom", "BottemRoom", "TopRoom", "EndingRoom" };
-        
 
+
+
+        AIReader ai;
+        List<Enemy> enemies;
+        HitDetections hitdetection;
 
 
 
@@ -53,6 +58,7 @@ namespace GameDevProject
         protected override void LoadContent()
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
+            enemies = new List<Enemy>();
 
 
 
@@ -62,6 +68,7 @@ namespace GameDevProject
             loadmapcontent();
             collisiondetect = new CollisionDetection(wereld.ActiveRoom.GetCollisions());
             InitializeGameObject();
+            //hitdetection = new HitDetections(hero, enemies);
 
             // TODO: use this.Content to load your game content here
         }
@@ -78,14 +85,18 @@ namespace GameDevProject
             SpearMantextures = new List<Texture2D>();
             SpearMantextures.Add(Content.Load<Texture2D>("Sprites/SpearManLeft"));
             SpearMantextures.Add(Content.Load<Texture2D>("Sprites/SpearManRight"));
+            
         }
         private void InitializeGameObject()
         {
             hero = new Hero(Herotextures,collisiondetect);
             hero.Spawn(wereld.ActiveRoom.GetSpawn());
+            ai = new AIReader(hero);
+            spearman = new Spearman(SpearMantextures, collisiondetect,ai);
+            spearman.Spawn(new Vector2(400, 400));
+            //enemies.Add(spearman);
 
-            spearman = new Spearman(SpearMantextures, collisiondetect);
-            spearman.Spawn(wereld.ActiveRoom.GetSpawn());
+
         }
 
 
@@ -110,12 +121,14 @@ namespace GameDevProject
 
             // TODO: Add your update logic here
             hero.Update(gameTime);
-            spearman.Update(gameTime);
             collisiondetect.walls = wereld.ActiveRoom.GetCollisions();
 
             wereld.Update(hero);
-
-            spearman.Spawn(hero.Position);
+            foreach (Enemy item in enemies)
+            {
+                item.Update(gameTime);
+            }
+            spearman.Update(gameTime);
             
             base.Update(gameTime);
         }
@@ -130,7 +143,7 @@ namespace GameDevProject
             */
             _spriteBatch.Begin();
             wereld.ActiveRoom.Draw(_spriteBatch);
-            //_spriteBatch.Draw(debugchar, hero.CollisionRectangle, Color.White);
+            _spriteBatch.Draw(debugchar,AIReader.hitbox, Color.White);
 
 
 
