@@ -15,8 +15,8 @@ using GameDevProject.Detections;
 namespace GameDevProject 
 {
     public enum LoopRichting { links, rechts };
-    public enum CharState { idle,run,attack,jumping};
-    class Hero : IGameObject, ITransform
+    public enum CharState { idle,run,attack,jumping,death};
+    class Hero : IGameObject, ITransform,ICombat
     {
         public const int height = 60;
         public const int Width = 50;
@@ -39,16 +39,19 @@ namespace GameDevProject
             set { _CollisionRectangle = value; }
         }
 
-        public Vector2 AttackRange { get ; set; }
+        
 
         private Rectangle _CollisionRectangle;
 
 
-
-
+        public Rectangle Attackbox { get; set; }
+        public bool Attacklock { get; set ; }
+        public int Health { get ; set ; }
+        public int Damage { get; set ; }
 
         public Hero(List<Texture2D> textures,CollisionDetection objects)
         {
+            
             //basic information of entity
             Position = new Vector2(400, 400);
             VerticalMovement = new Vector2(0, 0);// X: verticalmovement => 1 = ja          0= nee    Y: current jump speed
@@ -56,7 +59,10 @@ namespace GameDevProject
             status = CharState.idle;
             richting = LoopRichting.rechts;
             herotexture = textures;
-            this.AttackRange = new Vector2(60, 60);
+            this.Attackbox = new Rectangle(0, 0, 60, 60);
+            Attacklock = false;
+            Health = 100;
+            Damage = 20;
 
             //animations
             animations = new List<List<Animatie>>();
@@ -90,10 +96,23 @@ namespace GameDevProject
             UpdateAnimations(gametime);
             MoveHorizontal(inputreader.ReadLeftRight());
             MoveVertical();
+            updateAttackbox();
             inputreader.ReadAttack();
             _CollisionRectangle.X = (int)Position.X;
             _CollisionRectangle.Y = (int)Position.Y;
 
+        }
+        private void updateAttackbox()
+        {
+
+            if (this.richting == LoopRichting.rechts)
+            {
+                this.Attackbox = new Rectangle((int)this.Position.X + this.CollisionRectangle.Width, (int)this.Position.Y, (int)this.Attackbox.Width, (int)this.Attackbox.Height);
+            }
+            else
+            {
+                this.Attackbox = new Rectangle((int)this.Position.X - (int)this.Attackbox.Width, (int)this.Position.Y, (int)this.Attackbox.Width, (int)this.Attackbox.Height);
+            }
         }
 
         private void StatePicker()
@@ -145,6 +164,17 @@ namespace GameDevProject
                 }
 
             movecommand.ExecuteHorizontal(this, _direction);
+        }
+
+        public void TakeDamage(int dmg)
+        {
+            this.Health -= dmg;
+            if (Health < 0)
+            {
+                Debug.Write("player death");
+                //this.status = CharState.death;
+            }
+
         }
     }
 }

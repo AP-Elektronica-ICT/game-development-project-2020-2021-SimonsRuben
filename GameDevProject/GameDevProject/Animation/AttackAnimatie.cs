@@ -39,6 +39,7 @@ namespace GameDevProject.Animation
             {
                 counter = 0;
                 entity.status = CharState.idle;
+                entity.Attacklock = false;
             }
 
         }

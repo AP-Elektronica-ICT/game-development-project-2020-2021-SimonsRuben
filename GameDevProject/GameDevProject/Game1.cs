@@ -20,7 +20,7 @@ namespace GameDevProject
         Hero hero;
         CollisionDetection collisiondetect;
 
-        Spearman spearman;
+        Enemy spearman;
         List<Texture2D> SpearMantextures;
         Texture2D debugchar;
 
@@ -68,7 +68,7 @@ namespace GameDevProject
             loadmapcontent();
             collisiondetect = new CollisionDetection(wereld.ActiveRoom.GetCollisions());
             InitializeGameObject();
-            //hitdetection = new HitDetections(hero, enemies);
+            hitdetection = new HitDetections(hero, enemies);
 
             // TODO: use this.Content to load your game content here
         }
@@ -94,7 +94,7 @@ namespace GameDevProject
             ai = new AIReader(hero);
             spearman = new Spearman(SpearMantextures, collisiondetect,ai);
             spearman.Spawn(new Vector2(400, 400));
-            //enemies.Add(spearman);
+            enemies.Add(spearman);
 
 
         }
@@ -128,7 +128,8 @@ namespace GameDevProject
             {
                 item.Update(gameTime);
             }
-            spearman.Update(gameTime);
+            hitdetection.update();
+
             
             base.Update(gameTime);
         }
@@ -143,11 +144,13 @@ namespace GameDevProject
             */
             _spriteBatch.Begin();
             wereld.ActiveRoom.Draw(_spriteBatch);
-            _spriteBatch.Draw(debugchar,AIReader.hitbox, Color.White);
+            _spriteBatch.Draw(debugchar,enemies[0].Attackbox, Color.White);
 
 
-
-            spearman.Draw(_spriteBatch);
+            foreach (Enemy item in enemies)
+            {
+                item.Draw(_spriteBatch);
+            }
             hero.Draw(_spriteBatch);
 
 

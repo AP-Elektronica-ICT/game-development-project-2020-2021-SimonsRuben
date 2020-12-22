@@ -13,7 +13,7 @@ namespace GameDevProject.Input
         private ITransform Entity;
 
         private ITransform target;
-        public static Rectangle hitbox;
+
         public AIReader( ITransform targettransform)
         {
             this.target = targettransform;
@@ -34,18 +34,8 @@ namespace GameDevProject.Input
 
         public void ReadAttack()
         {
-             hitbox = Rectangle.Empty;
-
-            if (Entity.richting == LoopRichting.rechts)
-            {
-                 hitbox = new Rectangle((int)Entity.Position.X + Entity.CollisionRectangle.Width, (int)Entity.Position.Y, (int)Entity.AttackRange.X, (int)Entity.AttackRange.Y);
-            }
-            else
-            {
-                 hitbox = new Rectangle((int)Entity.Position.X - (int)Entity.AttackRange.Y, (int)Entity.Position.Y, (int)Entity.AttackRange.X, (int)Entity.AttackRange.Y);
-            }
-
-            if (this.Entity.status != CharState.attack && CollisionDetection.CheckCollision(hitbox, target.CollisionRectangle))
+            
+            if (this.Entity.status != CharState.attack && CollisionDetection.CheckCollision(Entity.Attackbox, target.CollisionRectangle))
             {
                 this.Entity.status = CharState.attack;
                 //Debug.WriteLine("hit");

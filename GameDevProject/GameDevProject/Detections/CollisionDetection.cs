@@ -58,7 +58,7 @@ namespace GameDevProject.Detections
                 if (CheckCollision(character, item))
                 {
                     //Debug.WriteLine("COLLISION");
-                    Debug.WriteLine(item.Top);
+                    //Debug.WriteLine(item.Top);
                     return item.Top;
                 }
 

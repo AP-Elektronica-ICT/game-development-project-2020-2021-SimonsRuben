@@ -19,7 +19,9 @@ namespace GameDevProject.Interfaces
 
         public LoopRichting richting { get; set; }
         
-        public Vector2 AttackRange { get; set; }
+        public Rectangle Attackbox { get; set; }
+
+        public bool Attacklock { get; set; }
 
        
 

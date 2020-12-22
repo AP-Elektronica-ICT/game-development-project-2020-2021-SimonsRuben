@@ -9,14 +9,15 @@ using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Diagnostics;
 
 namespace GameDevProject.Entities
 {
-    abstract class Enemy : IGameObject, ITransform
+    abstract class Enemy : IGameObject, ITransform,ICombat
     {
-        SpearManAnimations spearmanAnimations;
+
         List<Texture2D> texture;
-        List<List<Animatie>> animations;
+        protected List<List<Animatie>> animations;//animations zal gegeven worden door de overerving
         public CharState status { get; set; }
         public LoopRichting richting { get; set; }
         private AIReader inputreader;
@@ -30,14 +31,16 @@ namespace GameDevProject.Entities
             get { return _CollisionRectangle; }
             set { _CollisionRectangle = value; }
         }
-
-        public Vector2 AttackRange { get; set; }
-
         private Rectangle _CollisionRectangle;
 
+        public Rectangle Attackbox { get; set; }
+        public bool Attacklock { get; set ; }
+        public int Health { get; set; }
+        public int Damage { get; set; }
 
         public Enemy(List<Texture2D> textures, CollisionDetection objects, AIReader AiInputReader)
         {
+            
             //basic information of entity
             Position = new Vector2(100, 100);
             VerticalMovement = new Vector2(0, 0);// X: verticalmovement => 1 = ja          0= nee    Y: current jump speed
@@ -45,21 +48,20 @@ namespace GameDevProject.Entities
             status = CharState.idle;
             richting = LoopRichting.links;
             texture = textures;
-            this.AttackRange = new Vector2(60, 60);
+            this.Attackbox = new Rectangle(0, 0, 60, 60);
+            Attacklock = false;
+            Health = 100;
+            Damage = 5;
 
-            //animations
-            animations = new List<List<Animatie>>();
-            spearmanAnimations = new SpearManAnimations();
-            animations.Add(spearmanAnimations.Idle());
-            animations.Add(spearmanAnimations.Run());
-            animations.Add(spearmanAnimations.Attack());
-            animations.Add(spearmanAnimations.Jump());
+            //animations zal gegeven worden door de overerving
+
+
 
             //movement and input
             this.inputreader = AiInputReader;
             this.inputreader.SetEntity(this);
             this.movecommand = new MoveCommand(objects);
-            CollisionRectangle = new Rectangle((int)Position.X, (int)Position.Y, Spearman.Width - 20, Spearman.height);//-20 offset
+            
 
         }
         public void Spawn(Vector2 pos)
@@ -79,10 +81,24 @@ namespace GameDevProject.Entities
             UpdateAnimations(gametime);
             MoveHorizontal(inputreader.ReadLeftRight());
             MoveVertical();
+            updateAttackbox();
             inputreader.ReadAttack();
-
             _CollisionRectangle.X = (int)Position.X;
             _CollisionRectangle.Y = (int)Position.Y;
+        }
+        private void updateAttackbox()
+        {
+            
+
+            if (this.richting == LoopRichting.rechts)
+            {
+                this.Attackbox = new Rectangle((int)this.Position.X + this.CollisionRectangle.Width, (int)this.Position.Y, (int)this.Attackbox.Width, (int)this.Attackbox.Height);
+            }
+            else
+            {
+                this.Attackbox = new Rectangle((int)this.Position.X - (int)this.Attackbox.Width, (int)this.Position.Y, (int)this.Attackbox.Width, (int)this.Attackbox.Height);
+            }
+            
         }
 
         private void UpdateAnimations(GameTime gametime)
@@ -91,27 +107,32 @@ namespace GameDevProject.Entities
         }
         private void StatePicker()
         {
-            if (status != CharState.attack)
+            if (status != CharState.death)
             {
+                if (status != CharState.attack)
+                {
 
-                if (this.VerticalMovement.X == 1)
-                {
-                    status = CharState.jumping;
-                }
-                else
-                {
-                    if (this.HorizontalMovement.X != 0)
+                    if (this.VerticalMovement.X == 1)
                     {
-                        status = CharState.run;
+                        status = CharState.jumping;
                     }
                     else
                     {
-                        status = CharState.idle;
+                        if (this.HorizontalMovement.X != 0)
+                        {
+                            status = CharState.run;
+                        }
+                        else
+                        {
+                            status = CharState.idle;
+                        }
+
                     }
 
                 }
 
             }
+           
         }
         private void MoveVertical()
         {
@@ -132,6 +153,16 @@ namespace GameDevProject.Entities
             }
 
             movecommand.ExecuteHorizontal(this, _direction);
+        }
+
+        public void TakeDamage(int dmg)
+        {
+            this.Health -= dmg;
+            if (Health < 0)
+            {
+                Debug.Write("enemy death");
+                //this.status = CharState.death;
+            }
         }
     }
 }

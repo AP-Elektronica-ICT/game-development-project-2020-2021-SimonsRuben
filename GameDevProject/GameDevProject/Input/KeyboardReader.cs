@@ -34,7 +34,7 @@ namespace GameDevProject.Input
             if (keyState.IsKeyDown(Keys.X) && player.status != CharState.attack)
             {
                 player.status = CharState.attack;
-                Debug.WriteLine("attack");
+                //Debug.WriteLine("attack");
             }
             
         }
