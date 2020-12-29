@@ -3,7 +3,7 @@
         "height": 4300,
         "width": 2
     },
-    "activeFile": "tilemap/CentralRoom.tmx",
+    "activeFile": "tilemap/StartRoom.tmx",
     "expandedProjectPaths": [
         "tilemap",
         "C:/Users/Ruben Simons/Desktop/game-development-project-2020-2021-SimonsRuben/GameDevProject/GameDevProject/Maps/begin map"
@@ -88,34 +88,34 @@
         },
         "tilemap/BottemRoom.tmx": {
             "scale": 0.75,
-            "selectedLayer": 0,
+            "selectedLayer": 5,
             "viewCenter": {
-                "x": 799.3333333333333,
-                "y": 479.33333333333337
+                "x": 792.6666666666667,
+                "y": 854.6666666666666
             }
         },
         "tilemap/CentralRoom.tmx": {
-            "scale": 2,
-            "selectedLayer": 4,
+            "scale": 1,
+            "selectedLayer": 5,
             "viewCenter": {
-                "x": 902.25,
-                "y": 210.5
+                "x": 729.5,
+                "y": 439
             }
         },
         "tilemap/EndingRoom.tmx": {
             "scale": 1,
-            "selectedLayer": 1,
+            "selectedLayer": 5,
             "viewCenter": {
-                "x": 799.5,
-                "y": 479.5
+                "x": 1042.5,
+                "y": 550
             }
         },
         "tilemap/StartRoom.tmx": {
             "scale": 1,
-            "selectedLayer": 1,
+            "selectedLayer": 5,
             "viewCenter": {
-                "x": 539.5,
-                "y": 413
+                "x": 944.5,
+                "y": 606
             }
         },
         "tilemap/Terrain (32x32).tsx": {
@@ -123,11 +123,11 @@
             "scaleInEditor": 1
         },
         "tilemap/TopRoom.tmx": {
-            "scale": 0.5,
-            "selectedLayer": 1,
+            "scale": 1,
+            "selectedLayer": 5,
             "viewCenter": {
-                "x": 867,
-                "y": 564
+                "x": 811.5,
+                "y": 519
             }
         },
         "tilemap/combine.tsx": {
@@ -187,11 +187,11 @@
     ],
     "project": "MapsMonogame.tiled-project",
     "recentFiles": [
-        "tilemap/StartRoom.tmx",
-        "tilemap/TopRoom.tmx",
-        "tilemap/EndingRoom.tmx",
-        "tilemap/BottemRoom.tmx",
         "tilemap/CentralRoom.tmx",
+        "tilemap/BottemRoom.tmx",
+        "tilemap/EndingRoom.tmx",
+        "tilemap/TopRoom.tmx",
+        "tilemap/StartRoom.tmx",
         "tilemap/combine.tsx",
         "tilemap/BeginRoom.tmx",
         "tilemap/terrain.tsx",

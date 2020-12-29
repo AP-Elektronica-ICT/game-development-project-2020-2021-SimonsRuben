@@ -164,7 +164,7 @@ namespace GameDevProject.Entities
             this.Health -= dmg;
             if (Health < 0)
             {
-                Debug.Write("enemy death");
+                //Debug.Write("enemy death");
                 this.status = CharState.death;
             }
         }

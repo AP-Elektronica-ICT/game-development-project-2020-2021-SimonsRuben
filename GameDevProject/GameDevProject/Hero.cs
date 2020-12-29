@@ -177,7 +177,7 @@ namespace GameDevProject
             this.Health -= dmg;
             if (Health < 0)
             {
-                Debug.Write("player death");
+                //Debug.Write("player death");
                 this.status = CharState.death;
             }
 

@@ -10,10 +10,6 @@ namespace GameDevProject.Detections
     {
         public List<Rectangle> walls;
 
-        public CollisionDetection(List<Rectangle> objects)
-        {
-            this.walls = objects;
-        }
 
 
         public bool checkwallsandplatforms(Rectangle character)

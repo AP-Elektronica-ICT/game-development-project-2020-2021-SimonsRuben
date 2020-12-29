@@ -17,11 +17,13 @@ namespace GameDevProject.Entities
         public const int height = 65;
         public const int Width = 65;
 
+        public static List<Texture2D> textures;
+
   
         SpearManAnimations spearmanAnimations;
 
 
-        public Spearman(List<Texture2D> textures, CollisionDetection objects , AIReader AiInputReader) : base(textures,objects,AiInputReader) 
+        public Spearman( CollisionDetection objects , AIReader AiInputReader) : base(textures,objects,AiInputReader) 
         {
             //animations 
             animations = new List<List<Animatie>>();

@@ -45,10 +45,12 @@ namespace GameDevProject.World
             cords = new Vector2(0, 1);//
         }
 
-        public void Update(Hero hero)
+        public void Update(Hero hero,GameTime gameTime)
         {
             UpdateRoom(hero);
-            
+            this.ActiveRoom.Update(gameTime);
+
+
         }
 
         private void UpdateRoom(Hero hero)

@@ -20,7 +20,6 @@ namespace GameDevProject
         Hero hero;
         CollisionDetection collisiondetect;
 
-        Enemy spearman;
         List<Texture2D> SpearMantextures;
         Texture2D debugchar;
 
@@ -31,7 +30,6 @@ namespace GameDevProject
 
 
 
-        AIReader ai;
         List<Enemy> enemies;
         HitDetections hitdetection;
 
@@ -59,16 +57,19 @@ namespace GameDevProject
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
             enemies = new List<Enemy>();
+            collisiondetect = new CollisionDetection();
 
 
 
 
             LoadSprites();
-            wereld = new Wereld(loadmapcontent());
-            loadmapcontent();
-            collisiondetect = new CollisionDetection(wereld.ActiveRoom.GetCollisions());
             InitializeGameObject();
-            hitdetection = new HitDetections(hero, enemies);
+            wereld = new Wereld(loadmapcontent());
+            
+            
+            collisiondetect.walls = wereld.ActiveRoom.GetCollisions();
+            hitdetection = new HitDetections(hero, wereld.ActiveRoom.enemies);
+            hero.Spawn(wereld.ActiveRoom.GetSpawn());
 
             // TODO: use this.Content to load your game content here
         }
@@ -85,16 +86,28 @@ namespace GameDevProject
             SpearMantextures = new List<Texture2D>();
             SpearMantextures.Add(Content.Load<Texture2D>("Sprites/SpearManLeft"));
             SpearMantextures.Add(Content.Load<Texture2D>("Sprites/SpearManRight"));
+            Spearman.textures = SpearMantextures;
             
         }
         private void InitializeGameObject()
         {
+            collisiondetect = new CollisionDetection();
             hero = new Hero(Herotextures,collisiondetect);
-            hero.Spawn(wereld.ActiveRoom.GetSpawn());
-            ai = new AIReader(hero);
-            spearman = new Spearman(SpearMantextures, collisiondetect,ai);
+            
+
+
+
+            /*
+            spearman = new Spearman(collisiondetect,ai);
             spearman.Spawn(new Vector2(400, 400));
             enemies.Add(spearman);
+            spearman = new Spearman(collisiondetect, new AIReader(hero));
+            spearman.Spawn(new Vector2(800, 400));
+            enemies.Add(spearman);
+            */
+
+
+
 
 
         }
@@ -110,7 +123,7 @@ namespace GameDevProject
             {
                 map = new TmxMap("Content/map/" + room + ".tmx");
                 tileset = Content.Load<Texture2D>(map.Tilesets[0].Name.ToString());
-                world.Add(new Room(map, tileset));
+                world.Add(new Room(map, tileset,collisiondetect,hero));
             }
             return world;
         }
@@ -123,12 +136,13 @@ namespace GameDevProject
             hero.Update(gameTime);
             collisiondetect.walls = wereld.ActiveRoom.GetCollisions();
 
-            wereld.Update(hero);
+            wereld.Update(hero,gameTime);
+            /*
             foreach (Enemy item in enemies)
             {
                 item.Update(gameTime);
-            }
-            hitdetection.update();
+            */
+            hitdetection.update(wereld.ActiveRoom.enemies);
 
             
             base.Update(gameTime);
@@ -144,13 +158,14 @@ namespace GameDevProject
             */
             _spriteBatch.Begin();
             wereld.ActiveRoom.Draw(_spriteBatch);
-            _spriteBatch.Draw(debugchar,enemies[0].Attackbox, Color.White);
+           // _spriteBatch.Draw(debugchar,enemies[0].Attackbox, Color.White);
 
-
+            /*
             foreach (Enemy item in enemies)
             {
                 item.Draw(_spriteBatch);
             }
+            */
             hero.Draw(_spriteBatch);
 
 

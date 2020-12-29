@@ -6,11 +6,14 @@ using System.Collections.Generic;
 using TiledSharp;
 using System.Diagnostics;
 using GameDevProject.Detections;
+using GameDevProject.Entities;
+using GameDevProject.Input;
+using GameDevProject.Interfaces;
 
 namespace GameDevProject.World
 {
     public enum side {Top,Right,Bottem,Left}
-    class Room
+    class Room : IGameObject
     {
         private TmxMap map;
 
@@ -23,7 +26,8 @@ namespace GameDevProject.World
 
         public List<Rectangle> Doors = new List<Rectangle>();
         public List<Vector2> SpawnAreas = new List<Vector2>();
-        public Room(TmxMap m , Texture2D texture)
+        public List<Enemy> enemies = new List<Enemy>();
+        public Room(TmxMap m , Texture2D texture, CollisionDetection collisiondetect,ITransform hero)
         {
             this.map = m;
             this.tileset = texture;
@@ -48,7 +52,19 @@ namespace GameDevProject.World
             }
             FillDoors();
             FillSpawnAreas();
+            SpawnEnemies(collisiondetect,hero);
             
+            
+        }
+        private void SpawnEnemies(CollisionDetection coldetect, ITransform hero)
+        {
+            foreach (var o in map.ObjectGroups[3].Objects)
+            {
+                Enemy temp = new Spearman(coldetect, new AIReader(hero));
+                temp.Spawn(new Vector2((float)o.X,(float)o.Y));
+                enemies.Add(temp);
+            }
+
         }
 
         private void FillDoors()
@@ -111,6 +127,19 @@ namespace GameDevProject.World
 
         public void Draw(SpriteBatch _spriteBatch)
         {
+           DrawMap(_spriteBatch);
+            DrawEnemies(_spriteBatch);
+        }
+        private void DrawEnemies(SpriteBatch _spriteBatch)
+        {
+            foreach(Enemy entity in enemies)
+            {
+                entity.Draw(_spriteBatch);
+            }
+        }
+
+        private void DrawMap(SpriteBatch _spriteBatch)
+        {
             for (int ji = 0; ji < map.Layers.Count; ji++)
             {
 
@@ -140,5 +169,12 @@ namespace GameDevProject.World
             }
         }
 
+        public void Update(GameTime gametime)
+        {
+            foreach (Enemy entity in enemies)
+            {
+                entity.Update(gametime);
+            }
+        }
     }
 }

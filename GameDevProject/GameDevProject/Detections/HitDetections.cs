@@ -18,8 +18,9 @@ namespace GameDevProject.Detections
             this.enemies = aliveenemies;
         }
         
-        public void update()
+        public void update(List<Enemy> aliveenemies)
         {
+            this.enemies = aliveenemies;
             CheckHeroToEnemy();
             CheckEnemyToHero();
         }
