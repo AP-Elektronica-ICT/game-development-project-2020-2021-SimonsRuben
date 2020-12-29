@@ -8,15 +8,16 @@ namespace GameDevProject.Animation.AnimationCreators
 {
     class AnimationFactory
     {
-        // hier worden alle animaties gemaakt met een factory (try catch filmpje 14)
+        private string[,] StatusAnimation = new string[,] {{"idle","run","attack","jumping","death" },{ "Animatie", "Animatie", "AttackAnimatie", "JumpingAnimatie", "DeathAnimation" } };
 
-        private Animatie CreateAnimation(string type, int[,] frames)
+     private Animatie CreateAnimation(string type, int[,] frames)
         {
+            /*
             Debug.WriteLine($@"
 DEBUG FACTORY
 TYPE = {type}
 frames = {frames.GetLength(0)}
-");
+");*/
             try
             {
                 Animatie temp = (Animatie)Activator.CreateInstance(Type.GetType($"GameDevProject.Animation.{type}"), new Object[] { });
@@ -48,38 +49,23 @@ frames = {frames.GetLength(0)}
         public List<List<Animatie>> CreateTotalAnimation(AnimationEntity animationEntity)
         {
             List<List<Animatie>> complete = new List<List<Animatie>>();
-            complete.Add(Idle(animationEntity.idleL,animationEntity.idleR));
-            complete.Add(Run(animationEntity.runL,animationEntity.runR));
-            complete.Add(Attack(animationEntity.AttackL,animationEntity.AttackR));
-            complete.Add(Jump(animationEntity.jumpingL,animationEntity.jumpingR));
-            complete.Add(Death(animationEntity.deathL,animationEntity.deathR));
+            Debug.WriteLine(StatusAnimation.GetLength(1));
+            for (int i = 0; i < StatusAnimation.GetLength(1); i++)
+            {
+                complete.Add(CreateBothAnimations(StatusAnimation[1, i], animationEntity.GetAnimationList(i * 2), animationEntity.GetAnimationList((i * 2) + 1)));
+                /*Animaties worden hier aangemaakt met behulp van een for om zo door elke status te loopen
+                 * elke status heeft zijn eigen soort animatie die string wordt gebruikt om de juist soort animatie aan te maken
+                 * de lijst van een animation entity is alle verschillende animatie op volgorde er in steken
+                 * het volgt de volgorde van de statussen en de volgorde van eerst links dan rechts
+                 * de index gaat er dan als volgt uitzien (idle links = 0, idle rechts = 1 , run links = 2 , run rechts = 3 ,...)
+                 * er zijn 5 verschillende status op dit moment dus loopen we 5 keer en per groep van 2 geven we de juist getallen mee voor de animatie te maken
+                 * 
+                 * 
+                 * */
+
+            }
+
             return complete;
         }
-        private List<Animatie> Idle(int[,] left,int[,] right)
-        {
-            string type = "Animatie";
-            return CreateBothAnimations(type, left, right);
-        }
-        private List<Animatie> Run(int[,] left, int[,] right)
-        {
-            string type = "Animatie";
-            return CreateBothAnimations(type, left, right);
-        }
-        private List<Animatie> Attack(int[,] left, int[,] right)
-        {
-            string type = "AttackAnimatie";
-            return CreateBothAnimations(type, left, right);
-        }
-        private List<Animatie> Jump(int[,] left, int[,] right)
-        {
-            string type = "JumpingAnimatie";
-            return CreateBothAnimations(type, left, right);
-        }
-        private List<Animatie> Death(int[,] left, int[,] right)
-        {
-            string type = "DeathAnimation";
-            return CreateBothAnimations(type, left, right);
-        }
-
     }
 }

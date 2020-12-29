@@ -21,7 +21,6 @@ namespace GameDevProject.World
         private int tileWidth;
         private int tileHeight;
         private int tilesetTilesWide;
-        private int tilesetTilesHigh;
         List<Rectangle> collisions = new List<Rectangle>();
 
         public List<Rectangle> Doors = new List<Rectangle>();

@@ -28,9 +28,6 @@ namespace GameDevProject
 
         string[] AllRooms = { "StartRoom", "CentralRoom", "BottemRoom", "TopRoom", "EndingRoom" };
 
-
-
-        List<Enemy> enemies;
         HitDetections hitdetection;
 
 
@@ -56,7 +53,6 @@ namespace GameDevProject
         protected override void LoadContent()
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
-            enemies = new List<Enemy>();
             collisiondetect = new CollisionDetection();
 
 
@@ -93,23 +89,6 @@ namespace GameDevProject
         {
             collisiondetect = new CollisionDetection();
             hero = new Hero(Herotextures,collisiondetect);
-            
-
-
-
-            /*
-            spearman = new Spearman(collisiondetect,ai);
-            spearman.Spawn(new Vector2(400, 400));
-            enemies.Add(spearman);
-            spearman = new Spearman(collisiondetect, new AIReader(hero));
-            spearman.Spawn(new Vector2(800, 400));
-            enemies.Add(spearman);
-            */
-
-
-
-
-
         }
 
 
@@ -137,11 +116,7 @@ namespace GameDevProject
             collisiondetect.walls = wereld.ActiveRoom.GetCollisions();
 
             wereld.Update(hero,gameTime);
-            /*
-            foreach (Enemy item in enemies)
-            {
-                item.Update(gameTime);
-            */
+
             hitdetection.update(wereld.ActiveRoom.enemies);
 
             
@@ -160,16 +135,8 @@ namespace GameDevProject
             wereld.ActiveRoom.Draw(_spriteBatch);
            // _spriteBatch.Draw(debugchar,enemies[0].Attackbox, Color.White);
 
-            /*
-            foreach (Enemy item in enemies)
-            {
-                item.Draw(_spriteBatch);
-            }
-            */
             hero.Draw(_spriteBatch);
 
-
-            
             _spriteBatch.End();
             base.Draw(gameTime);
         }

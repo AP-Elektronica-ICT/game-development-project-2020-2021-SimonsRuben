@@ -8,6 +8,15 @@ namespace GameDevProject.Animation.AnimationCreators
     class AnimationCreator
     {
         //wordt aangeroepen om de volledige lijst met alle animaties terug te geven aan enemy's en roept het aanmaken van de animaties aan
+        /*
+         * de animation creator klasse maakt voor elke entity een animatieEntityobject aan met alle info die nuttig is voor de animaties te maken
+         * vanaf een animation creator object wordt aangemaakt zullen alle animation entities laden
+         * momenteel zijn de verschillende animaties een hoop 2d arrays en dit kan niet beter worden gemaakt omdat
+         * de verschillende frames van de figuren handmatig zijn gekozen om zo de beste kwaliteit te krijgen.
+         * 
+         * 
+         * voor dit nog meer solid te maken zou je een lijst maken van AnimationEntities en de info en animatiesvragen met 1 methode te doen maar momenteel is dit nog goed genoeg
+         * */
         private AnimationEntity hero;
         private AnimationEntity spearman;
         private AnimationFactory factory;
@@ -74,6 +83,7 @@ namespace GameDevProject.Animation.AnimationCreators
                 {334, 676, 45, Hero.height},
                 {434, 676, 45, Hero.height }
             };
+            temp.CreateList();
 
             return temp;
         }
@@ -154,7 +164,7 @@ namespace GameDevProject.Animation.AnimationCreators
             };
 
 
-
+            temp.CreateList();
 
 
             return temp;

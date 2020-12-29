@@ -16,17 +16,12 @@ namespace GameDevProject.Entities
     {
         public const int height = 65;
         public const int Width = 65;
-
         public static List<Texture2D> textures;
-
-
         public Spearman( CollisionDetection objects , AIReader AiInputReader) : base(textures,objects,AiInputReader) 
         {
             //animations 
             AnimationCreator creator = new AnimationCreator();
             animations = creator.GetSpearmanAnimation();
-
-
             CollisionRectangle = new Rectangle((int)Position.X, (int)Position.Y, Spearman.Width - 20, Spearman.height);//-20 offset door de speer die hij vastheeft
 
 

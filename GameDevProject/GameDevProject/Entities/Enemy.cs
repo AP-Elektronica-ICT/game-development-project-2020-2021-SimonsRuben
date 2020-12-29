@@ -54,9 +54,6 @@ namespace GameDevProject.Entities
             Damage = 5;
 
             //animations zal gegeven worden door de overerving
-
-
-
             //movement and input
             this.inputreader = AiInputReader;
             this.inputreader.SetEntity(this);
