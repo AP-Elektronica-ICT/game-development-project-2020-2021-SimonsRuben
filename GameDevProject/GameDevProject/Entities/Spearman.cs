@@ -19,20 +19,13 @@ namespace GameDevProject.Entities
 
         public static List<Texture2D> textures;
 
-  
-        SpearManAnimations spearmanAnimations;
-
 
         public Spearman( CollisionDetection objects , AIReader AiInputReader) : base(textures,objects,AiInputReader) 
         {
             //animations 
-            animations = new List<List<Animatie>>();
-            spearmanAnimations = new SpearManAnimations();// 
-            animations.Add(spearmanAnimations.Idle());
-            animations.Add(spearmanAnimations.Run());
-            animations.Add(spearmanAnimations.Attack());
-            animations.Add(spearmanAnimations.Jump());
-            animations.Add(spearmanAnimations.Death());
+            AnimationCreator creator = new AnimationCreator();
+            animations = creator.GetSpearmanAnimation();
+
 
             CollisionRectangle = new Rectangle((int)Position.X, (int)Position.Y, Spearman.Width - 20, Spearman.height);//-20 offset door de speer die hij vastheeft
 

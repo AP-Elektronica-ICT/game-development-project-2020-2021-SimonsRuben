@@ -22,7 +22,7 @@ namespace GameDevProject
         public const int Width = 50;
 
         
-        HeroAnimations heroanimations;
+        
         List<Texture2D> herotexture;
         List<List<Animatie>> animations;
         public LoopRichting richting { get ; set; }
@@ -62,16 +62,13 @@ namespace GameDevProject
             this.Attackbox = new Rectangle(0, 0, 60, 60);
             Attacklock = false;
             Health = 100;
-            Damage = 20;
+            Damage = 200;
 
             //animations
-            animations = new List<List<Animatie>>();
-            heroanimations = new HeroAnimations();
-            animations.Add(heroanimations.Idle());
-            animations.Add(heroanimations.Run());
-            animations.Add(heroanimations.Attack());
-            animations.Add(heroanimations.Jump());
-            animations.Add(heroanimations.Death());
+            AnimationCreator creator = new AnimationCreator();
+            animations = creator.GetHeroAnimation();
+            
+
 
             //movement and input
             this.inputreader = new KeyboardReader(this);
