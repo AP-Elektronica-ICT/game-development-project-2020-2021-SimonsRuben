@@ -5,7 +5,7 @@ using System.Text;
 
 namespace GameDevProject.Animation.AnimationCreators
 {
-    class HeroAnimations : IAnimation,IjumpingAnimation
+    class HeroAnimations : IAnimation,IjumpingAnimation,IdeathAnimation
     {
         private int height = Hero.Width;
         private int width = Hero.height;
@@ -140,6 +140,34 @@ namespace GameDevProject.Animation.AnimationCreators
             jumpR.AddFrame(new AnimationFrame(new Rectangle(228, 160, height, width)));
             jumpR.AddFrame(new AnimationFrame(new Rectangle(230, 226, height, width)));
             return jumpR;
+        }
+
+        public List<Animatie> Death()
+        {
+            List<Animatie> death = new List<Animatie>();
+            death.Add(CreateLeftDeath());
+            death.Add(CreateRightDeath());
+            return death;
+        }
+
+        public Animatie CreateLeftDeath()
+        {
+            Animatie DieL = new DeathAnimation();
+            DieL.AddFrame(new AnimationFrame(new Rectangle(493, 676, 45, width)));
+            
+            DieL.AddFrame(new AnimationFrame(new Rectangle(386, 676, 45, width)));
+            DieL.AddFrame(new AnimationFrame(new Rectangle(286, 676, 45, width))); 
+
+            return DieL;
+        }
+
+        public Animatie CreateRightDeath()
+        {
+            Animatie DieR = new DeathAnimation();
+            DieR.AddFrame(new AnimationFrame(new Rectangle(231, 676, 45, width))); 
+            DieR.AddFrame(new AnimationFrame(new Rectangle(334, 676, 45, width)));
+            DieR.AddFrame(new AnimationFrame(new Rectangle(434, 676, 45, width)));
+            return DieR;
         }
     }
 }

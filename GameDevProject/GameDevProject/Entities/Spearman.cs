@@ -25,11 +25,12 @@ namespace GameDevProject.Entities
         {
             //animations 
             animations = new List<List<Animatie>>();
-            spearmanAnimations = new SpearManAnimations();
+            spearmanAnimations = new SpearManAnimations();// 
             animations.Add(spearmanAnimations.Idle());
             animations.Add(spearmanAnimations.Run());
             animations.Add(spearmanAnimations.Attack());
             animations.Add(spearmanAnimations.Jump());
+            animations.Add(spearmanAnimations.Death());
 
             CollisionRectangle = new Rectangle((int)Position.X, (int)Position.Y, Spearman.Width - 20, Spearman.height);//-20 offset door de speer die hij vastheeft
 

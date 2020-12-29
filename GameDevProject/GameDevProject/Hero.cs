@@ -71,6 +71,7 @@ namespace GameDevProject
             animations.Add(heroanimations.Run());
             animations.Add(heroanimations.Attack());
             animations.Add(heroanimations.Jump());
+            animations.Add(heroanimations.Death());
 
             //movement and input
             this.inputreader = new KeyboardReader(this);
@@ -91,15 +92,20 @@ namespace GameDevProject
 
         public void Update(GameTime gametime)
         {
-            
-            StatePicker();
             UpdateAnimations(gametime);
-            MoveHorizontal(inputreader.ReadLeftRight());
-            MoveVertical();
-            updateAttackbox();
-            inputreader.ReadAttack();
-            _CollisionRectangle.X = (int)Position.X;
-            _CollisionRectangle.Y = (int)Position.Y;
+            if (this.status != CharState.death)
+            {
+                StatePicker();
+
+                MoveHorizontal(inputreader.ReadLeftRight());
+                MoveVertical();
+                updateAttackbox();
+                inputreader.ReadAttack();
+                _CollisionRectangle.X = (int)Position.X;
+                _CollisionRectangle.Y = (int)Position.Y;
+
+            }
+            
 
         }
         private void updateAttackbox()
@@ -172,7 +178,7 @@ namespace GameDevProject
             if (Health < 0)
             {
                 Debug.Write("player death");
-                //this.status = CharState.death;
+                this.status = CharState.death;
             }
 
         }

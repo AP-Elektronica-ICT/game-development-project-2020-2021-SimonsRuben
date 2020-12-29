@@ -6,7 +6,7 @@ using System.Text;
 
 namespace GameDevProject.Animation.AnimationCreators
 {
-    class SpearManAnimations : IAnimation, IjumpingAnimation
+    class SpearManAnimations : IAnimation, IjumpingAnimation , IdeathAnimation
     {
         private int height = Spearman.height;
         private int width = Spearman.Width;
@@ -29,6 +29,8 @@ namespace GameDevProject.Animation.AnimationCreators
             AttackL.AddFrame(new AnimationFrame(new Rectangle(981, 35, 71, 73)));
             return AttackL;
         }
+
+        
 
         public Animatie CreateLeftIdle()
         {
@@ -69,6 +71,8 @@ namespace GameDevProject.Animation.AnimationCreators
             return AttackR;
         }
 
+        
+
         public Animatie CreateRightIdle()
         {
             Animatie idleR = new Animatie();
@@ -94,6 +98,34 @@ namespace GameDevProject.Animation.AnimationCreators
             runR.AddFrame(new AnimationFrame(new Rectangle(1155, 35, width, height)));
 
             return runR;
+        }
+        public Animatie CreateLeftDeath()
+        {
+            Animatie DieL = new DeathAnimation();
+            DieL.AddFrame(new AnimationFrame(new Rectangle(25, 30, 71, 72)));
+            DieL.AddFrame(new AnimationFrame(new Rectangle(121, 30, 67, 70)));
+            DieL.AddFrame(new AnimationFrame(new Rectangle(217, 30, 66, 67)));
+            DieL.AddFrame(new AnimationFrame(Rectangle.Empty));
+
+            return DieL;
+        }
+        public Animatie CreateRightDeath()
+        {
+            Animatie DieR = new DeathAnimation();
+            DieR.AddFrame(new AnimationFrame(new Rectangle(2591, 30, 71, 72)));
+            DieR.AddFrame(new AnimationFrame(new Rectangle(2499, 30 ,67, 70)));
+            DieR.AddFrame(new AnimationFrame(new Rectangle(2404, 30, 66, 67)));
+            DieR.AddFrame(new AnimationFrame(Rectangle.Empty));
+
+            return DieR;
+        }
+
+        public List<Animatie> Death()
+        {
+            List<Animatie> Death = new List<Animatie>();
+            Death.Add(CreateLeftDeath());
+            Death.Add(CreateRightDeath());
+            return Death;
         }
 
         public List<Animatie> Idle()
