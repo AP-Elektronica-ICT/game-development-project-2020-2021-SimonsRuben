@@ -21,6 +21,7 @@ namespace GameDevProject.World
         private int tileWidth;
         private int tileHeight;
         private int tilesetTilesWide;
+        private int tilesetTilesHigh;
         List<Rectangle> collisions = new List<Rectangle>();
 
         public List<Rectangle> Doors = new List<Rectangle>();
@@ -170,10 +171,24 @@ namespace GameDevProject.World
 
         public void Update(GameTime gametime)
         {
+
+            Debug.WriteLine("");
             foreach (Enemy entity in enemies)
             {
                 entity.Update(gametime);
+                Debug.Write("Enemy: " + entity.status);
             }
+        }
+        public bool RoomCleared()
+        {
+            foreach (Enemy entity in enemies)
+            {
+                if (entity.status != CharState.death)
+                {
+                    return false;   
+                }
+            }
+            return true;
         }
     }
 }

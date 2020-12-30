@@ -9,21 +9,23 @@ using GameDevProject.Detections;
 
 namespace GameDevProject.World
 {
+    public enum room { StartRoom, CentralRoom, BottemRoom, TopRoom, EndingRoom }
     class Wereld
     {
         List<Room> Rooms = new List<Room>();
 
         private Vector2 cords;
+        private int level;
 
-        private Room[,] world;
 
+        private List<Room[,]> World;
         private Room _activeRoom;
 
         public Room ActiveRoom
         {
             get 
             {
-                _activeRoom = world[(int)cords.Y,(int)cords.X];// Y is welke Rij het is en X is de Colom
+                _activeRoom = World[level][(int)cords.Y,(int)cords.X];// Y is welke Rij het is en X is de Colom
                 return _activeRoom; 
             }
             set 
@@ -35,11 +37,18 @@ namespace GameDevProject.World
 
         public Wereld(List<Room> w)
         {
+            level = 0;
+            World = new List<Room[,]>();
             this.Rooms = w;
-            world = new Room[,] { 
-                { null,Rooms[3],null },
-                { Rooms[0],Rooms[1],Rooms[4]  },
-                { null,Rooms[2],null } };
+            World.Add(new Room[,] { 
+                { null,Rooms[(int)room.TopRoom],null },
+                { Rooms[(int)room.StartRoom],Rooms[(int)room.CentralRoom],Rooms[(int)room.EndingRoom]  },
+                { null,Rooms[(int)room.BottemRoom],null } });
+
+            World.Add(new Room[,] {
+                { Rooms[(int)room.TopRoom],null ,null },
+                { Rooms[(int)room.CentralRoom] , Rooms[(int)room.EndingRoom] , Rooms[(int)room.EndingRoom] },
+                {  Rooms[(int)room.BottemRoom],null ,null} });
 
 
             cords = new Vector2(0, 1);//
@@ -47,10 +56,18 @@ namespace GameDevProject.World
 
         public void Update(Hero hero,GameTime gameTime)
         {
-            UpdateRoom(hero);
+            ProgressRoom(hero);
             this.ActiveRoom.Update(gameTime);
 
 
+        }
+        private void ProgressRoom(Hero hero)
+        {
+            if (this.ActiveRoom.RoomCleared())
+            {
+                UpdateRoom(hero);
+            }
+            
         }
 
         private void UpdateRoom(Hero hero)
@@ -76,14 +93,25 @@ namespace GameDevProject.World
 
                 if (PickedDoor % 2 == 0)
                 {
-                    cords.Y += NextRoom;
+                    if (cords.Y + NextRoom >= 0  && cords.Y + NextRoom < World[level].GetLength(0))
+                    {
+                        cords.Y += NextRoom;
+                        hero.Spawn(ActiveRoom.SpawnAreas[Spawn]);
+                    }
+                    
                 }
                 else
                 {
-                    cords.X += NextRoom;
+                    if (cords.X + NextRoom >= 0 && cords.X + NextRoom < World[level].GetLength(1))
+                    {
+                        cords.X += NextRoom;
+                        hero.Spawn(ActiveRoom.SpawnAreas[Spawn]);
+                    }
+                    
                 }
+
                 //Debug.WriteLine((side)PickedDoor);
-                hero.Spawn(ActiveRoom.SpawnAreas[Spawn]);
+                
             }
         }
         private int CheckDoors(Hero hero)
