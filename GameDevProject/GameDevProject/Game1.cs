@@ -32,7 +32,7 @@ namespace GameDevProject
 
 
 
-        Wereld wereld;
+        LevelPicker Levels;
         public Game1()
         {
             _graphics = new GraphicsDeviceManager(this);
@@ -60,12 +60,13 @@ namespace GameDevProject
 
             LoadSprites();
             InitializeGameObject();
-            wereld = new Wereld(loadmapcontent());
+            Levels = new LevelPicker(loadmapcontent(),hero);
+
             
             
-            collisiondetect.walls = wereld.ActiveRoom.GetCollisions();
-            hitdetection = new HitDetections(hero, wereld.ActiveRoom.enemies);
-            hero.Spawn(wereld.ActiveRoom.GetSpawn());
+            collisiondetect.walls = Levels.GetActiveWereld().ActiveRoom.GetCollisions();
+            hitdetection = new HitDetections(hero, Levels.GetActiveWereld().ActiveRoom.enemies);
+            hero.Spawn(Levels.GetActiveWereld().ActiveRoom.GetSpawn());
 
             // TODO: use this.Content to load your game content here
         }
@@ -113,11 +114,11 @@ namespace GameDevProject
 
             // TODO: Add your update logic here
             hero.Update(gameTime);
-            collisiondetect.walls = wereld.ActiveRoom.GetCollisions();
+            collisiondetect.walls = Levels.GetActiveWereld().ActiveRoom.GetCollisions();
 
-            wereld.Update(hero,gameTime);
+            Levels.Update(gameTime);
 
-            hitdetection.update(wereld.ActiveRoom.enemies);
+            hitdetection.update(Levels.GetActiveWereld().ActiveRoom.enemies);
 
             
             base.Update(gameTime);
@@ -132,7 +133,7 @@ namespace GameDevProject
 
             */
             _spriteBatch.Begin();
-            wereld.ActiveRoom.Draw(_spriteBatch);
+            Levels.Draw(_spriteBatch);
            // _spriteBatch.Draw(debugchar,enemies[0].Attackbox, Color.White);
 
             hero.Draw(_spriteBatch);

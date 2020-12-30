@@ -6,26 +6,24 @@ using System.Collections.Generic;
 using TiledSharp;
 using System.Diagnostics;
 using GameDevProject.Detections;
+using GameDevProject.Interfaces;
 
 namespace GameDevProject.World
 {
-    public enum room { StartRoom, CentralRoom, BottemRoom, TopRoom, EndingRoom }
+    
     class Wereld
     {
-        List<Room> Rooms = new List<Room>();
-
         private Vector2 cords;
-        private int level;
+        private Vector2 end;
+        private Room[,] world;
 
-
-        private List<Room[,]> World;
         private Room _activeRoom;
 
         public Room ActiveRoom
         {
             get 
             {
-                _activeRoom = World[level][(int)cords.Y,(int)cords.X];// Y is welke Rij het is en X is de Colom
+                _activeRoom = world[(int)cords.Y,(int)cords.X];// Y is welke Rij het is en X is de Colom
                 return _activeRoom; 
             }
             set 
@@ -35,23 +33,11 @@ namespace GameDevProject.World
         }
 
 
-        public Wereld(List<Room> w)
+        public Wereld(Room[,] w ,Vector2 startcords , Vector2 endingcords)
         {
-            level = 0;
-            World = new List<Room[,]>();
-            this.Rooms = w;
-            World.Add(new Room[,] { 
-                { null,Rooms[(int)room.TopRoom],null },
-                { Rooms[(int)room.StartRoom],Rooms[(int)room.CentralRoom],Rooms[(int)room.EndingRoom]  },
-                { null,Rooms[(int)room.BottemRoom],null } });
-
-            World.Add(new Room[,] {
-                { Rooms[(int)room.TopRoom],null ,null },
-                { Rooms[(int)room.CentralRoom] , Rooms[(int)room.EndingRoom] , Rooms[(int)room.EndingRoom] },
-                {  Rooms[(int)room.BottemRoom],null ,null} });
-
-
-            cords = new Vector2(0, 1);//
+            this.world =w;
+            this.cords = startcords;
+            this.end = endingcords;
         }
 
         public void Update(Hero hero,GameTime gameTime)
@@ -93,7 +79,7 @@ namespace GameDevProject.World
 
                 if (PickedDoor % 2 == 0)
                 {
-                    if (cords.Y + NextRoom >= 0  && cords.Y + NextRoom < World[level].GetLength(0))
+                    if (cords.Y + NextRoom >= 0  && cords.Y + NextRoom < world.GetLength(0))
                     {
                         cords.Y += NextRoom;
                         hero.Spawn(ActiveRoom.SpawnAreas[Spawn]);
@@ -102,7 +88,7 @@ namespace GameDevProject.World
                 }
                 else
                 {
-                    if (cords.X + NextRoom >= 0 && cords.X + NextRoom < World[level].GetLength(1))
+                    if (cords.X + NextRoom >= 0 && cords.X + NextRoom < world.GetLength(1))
                     {
                         cords.X += NextRoom;
                         hero.Spawn(ActiveRoom.SpawnAreas[Spawn]);
@@ -128,6 +114,9 @@ namespace GameDevProject.World
         }
 
 
-
+        public void Draw(SpriteBatch spritebatch)
+        {
+            this.ActiveRoom.Draw(spritebatch);
+        }
     }
 }
