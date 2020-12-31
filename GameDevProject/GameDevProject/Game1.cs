@@ -60,13 +60,13 @@ namespace GameDevProject
 
             LoadSprites();
             InitializeGameObject();
-            Levels = new LevelPicker(loadmapcontent(),hero);
+            Levels = new LevelPicker(loadmapcontent(),hero,collisiondetect);
 
             
             
             collisiondetect.walls = Levels.GetActiveWereld().ActiveRoom.GetCollisions();
             hitdetection = new HitDetections(hero, Levels.GetActiveWereld().ActiveRoom.enemies);
-            hero.Spawn(Levels.GetActiveWereld().ActiveRoom.GetSpawn());
+            //hero.Spawn(Levels.GetActiveWereld().ActiveRoom.GetSpawn());
 
             // TODO: use this.Content to load your game content here
         }

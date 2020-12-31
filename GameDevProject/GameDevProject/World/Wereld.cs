@@ -16,6 +16,7 @@ namespace GameDevProject.World
         private Vector2 cords;
         private Vector2 end;
         private Room[,] world;
+        public bool completed;
 
         private Room _activeRoom;
 
@@ -38,7 +39,9 @@ namespace GameDevProject.World
             this.world =w;
             this.cords = startcords;
             this.end = endingcords;
+            completed = false;
         }
+
 
         public void Update(Hero hero,GameTime gameTime)
         {
@@ -84,6 +87,10 @@ namespace GameDevProject.World
                         cords.Y += NextRoom;
                         hero.Spawn(ActiveRoom.SpawnAreas[Spawn]);
                     }
+                    else if (cords.Y + NextRoom == end.Y && cords.X == end.X)
+                    {
+                        completed = true;
+                    }
                     
                 }
                 else
@@ -93,7 +100,11 @@ namespace GameDevProject.World
                         cords.X += NextRoom;
                         hero.Spawn(ActiveRoom.SpawnAreas[Spawn]);
                     }
-                    
+                    else if (cords.Y  == end.Y && cords.X + NextRoom == end.X)
+                    {
+                        completed = true;
+                    }
+
                 }
 
                 //Debug.WriteLine((side)PickedDoor);

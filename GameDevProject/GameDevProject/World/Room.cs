@@ -27,11 +27,22 @@ namespace GameDevProject.World
         public List<Rectangle> Doors = new List<Rectangle>();
         public List<Vector2> SpawnAreas = new List<Vector2>();
         public List<Enemy> enemies = new List<Enemy>();
+
+        public Room(Room R,CollisionDetection collisiondetect,ITransform hero)
+        {
+            this.map = R.map;
+            this.tileset = R.tileset;
+            InitializeRoom(collisiondetect,hero);
+
+        }
         public Room(TmxMap m , Texture2D texture, CollisionDetection collisiondetect,ITransform hero)
         {
             this.map = m;
             this.tileset = texture;
-
+            InitializeRoom(collisiondetect,hero);
+        }
+        private void InitializeRoom(CollisionDetection collisiondetect, ITransform hero)
+        {
             tileWidth = map.Tilesets[0].TileWidth;
             tileHeight = map.Tilesets[0].TileHeight;
 
@@ -52,9 +63,7 @@ namespace GameDevProject.World
             }
             FillDoors();
             FillSpawnAreas();
-            SpawnEnemies(collisiondetect,hero);
-            
-            
+            SpawnEnemies(collisiondetect, hero);
         }
         private void SpawnEnemies(CollisionDetection coldetect, ITransform hero)
         {
@@ -140,6 +149,8 @@ namespace GameDevProject.World
 
         private void DrawMap(SpriteBatch _spriteBatch)
         {
+            //https://www.trccompsci.online/mediawiki/index.php/Using_a_tmx_map_in_monogame
+            // the whole map is made with tiledsharp see above link for documentation
             for (int ji = 0; ji < map.Layers.Count; ji++)
             {
 
@@ -172,11 +183,11 @@ namespace GameDevProject.World
         public void Update(GameTime gametime)
         {
 
-            Debug.WriteLine("");
+            //Debug.WriteLine("");
             foreach (Enemy entity in enemies)
             {
                 entity.Update(gametime);
-                Debug.Write("Enemy: " + entity.status);
+                //Debug.Write("Enemy: " + entity.status);
             }
         }
         public bool RoomCleared()
