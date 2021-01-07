@@ -9,6 +9,7 @@ using GameDevProject.Detections;
 using GameDevProject.World;
 using GameDevProject.Entities;
 using GameDevProject.Input;
+using GameDevProject.Menu;
 
 namespace GameDevProject
 {
@@ -29,10 +30,19 @@ namespace GameDevProject
         string[] AllRooms = { "StartRoom", "CentralRoom", "BottemRoom", "TopRoom", "EndingRoom" };
 
         HitDetections hitdetection;
-
-
-
         LevelPicker Levels;
+
+
+
+        // added state for menu
+        private State _currentState;
+        private State _nextState;
+
+        public void ChangeState(State state)
+        {
+            _nextState = state;
+        }
+
         public Game1()
         {
             _graphics = new GraphicsDeviceManager(this);
@@ -55,6 +65,7 @@ namespace GameDevProject
             _spriteBatch = new SpriteBatch(GraphicsDevice);
             collisiondetect = new CollisionDetection();
 
+            _currentState = new MenuState(this, _graphics.GraphicsDevice, Content);
 
 
 
@@ -112,6 +123,14 @@ namespace GameDevProject
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
+            if (_nextState != null)
+            {
+                _currentState = _nextState;
+                _nextState = null;
+            }
+            _currentState.Update(gameTime);
+            _currentState.PostUpdate(gameTime);
+
             // TODO: Add your update logic here
             hero.Update(gameTime);
             collisiondetect.walls = Levels.GetActiveWereld().ActiveRoom.GetCollisions();
@@ -139,6 +158,9 @@ namespace GameDevProject
             hero.Draw(_spriteBatch);
 
             _spriteBatch.End();
+
+
+            _currentState.Draw(gameTime, _spriteBatch);
             base.Draw(gameTime);
         }
         
