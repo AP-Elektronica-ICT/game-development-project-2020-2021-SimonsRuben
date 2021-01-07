@@ -35,16 +35,35 @@ namespace GameDevProject.World
         {
             this.hero = h;
             this.Levels = new List<Wereld>();
-            this.levelnumber = -1;
+            this.levelnumber = 0;
             this.PossibleRooms = w;
             this.coldetect = collisionDetect;
             this.Levels.Add(new Wereld(CreateWorld(level1), new Vector2(0, 1),new  Vector2(3,1)));
             this.Levels.Add(new Wereld(CreateWorld(level2), new Vector2(0, 1), new Vector2(3, 1)));
-            NextLevel();
+
 
 
         }
-
+        public void SetLevel(int levelinput)
+        {
+            this.levelnumber = levelinput - 1;
+            hero.Spawn(Levels[levelnumber].ActiveRoom.GetSpawn());
+        }
+        public int GetAmountOfLevels()
+        {
+            return this.Levels.Count;
+        }
+        public bool Done()
+        {
+            if (Levels[levelnumber].completed)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
         public void Draw(SpriteBatch spritebatch)
         {
             Levels[levelnumber].Draw(spritebatch);
@@ -53,11 +72,9 @@ namespace GameDevProject.World
         public void Update(GameTime gametime)
         {
             Levels[levelnumber].Update(hero, gametime);
-            if (Levels[levelnumber].completed)
-            {
-                NextLevel();
-            }
+            
         }
+        /*
         private void NextLevel()
         {
             if (levelnumber + 1 < Levels.Count)
@@ -74,6 +91,7 @@ namespace GameDevProject.World
             }
             
         }
+        */
         public Wereld GetActiveWereld()
         {
             return Levels[levelnumber];

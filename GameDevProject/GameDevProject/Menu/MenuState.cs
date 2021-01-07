@@ -10,27 +10,43 @@ namespace GameDevProject.Menu
 {
     class MenuState : State
     {
+        /* DE HELE MENU MAP IS GEMAAKT ROND HET PRINCIPE VAN EEN VIDEO DIE IK HEB GEVOLGT
+         * 
+         * LINK: https://youtu.be/76Mz7ClJLoE
+         * 
+         * 
+         * 
+         * 
+         * 
+         * 
+         */
+
+
+
         private List<Component> _components;
+        private Texture2D background;
         public MenuState(Game1 game, GraphicsDevice graphicsDevice, ContentManager content) : base(game,graphicsDevice,content)
         {
             var buttonTexture = _content.Load<Texture2D>("menu/Button");
             var buttonFont = _content.Load<SpriteFont>("menu/Font");
+            background = _content.Load<Texture2D>("menu/background");
 
             var newGameButton = new Button(buttonTexture, buttonFont)
             {
-                Position = new Vector2(300, 200),
-                Text = "New Game"
+
+                Position = new Vector2(720, 600),
+                Text = "Play Level1"
             };
             newGameButton.Click += NewGameButton_Click;
             var loadGameButton = new Button(buttonTexture, buttonFont)
             {
-                Position = new Vector2(300, 250),
-                Text = "Load Game"
+                Position = new Vector2(720, 700),
+                Text = "Play Level2 "
             };
             loadGameButton.Click += LoadGameButton_Click;
             var quitGameButton = new Button(buttonTexture, buttonFont)
             {
-                Position = new Vector2(300, 300),
+                Position = new Vector2(720, 800),
                 Text = "Quit Game"
             };
             quitGameButton.Click += QuitGameButton_Click;
@@ -46,13 +62,14 @@ namespace GameDevProject.Menu
         private void NewGameButton_Click(object sender, EventArgs e)
         {
             Debug.WriteLine("New game");
-            _game.ChangeState(new GameState(_game, _graphicsDevice, _content));
+            _game.ChangeState(new GameState(_game, _graphicsDevice, _content,1));
         }
 
 
         private void LoadGameButton_Click(object sender, EventArgs e)
         {
-            Debug.WriteLine("LOADING GAME");
+            Debug.WriteLine("Level 2 ");
+            _game.ChangeState(new GameState(_game, _graphicsDevice, _content, 2));
         }
 
         
@@ -66,8 +83,10 @@ namespace GameDevProject.Menu
 
         public override void Draw(GameTime gameTime, SpriteBatch _spriteBatch)
         {
-            Debug.WriteLine("Draw Menu");
+            //Debug.WriteLine("Draw Menu");
             _spriteBatch.Begin();
+
+            _spriteBatch.Draw(background, new Rectangle(0, 0, 1600, 960), Color.White);
             foreach (var component in _components)
             {
                 component.Draw(gameTime, _spriteBatch);
@@ -81,10 +100,7 @@ namespace GameDevProject.Menu
                 component.Update(gameTime);
             }
         }
-        public override void PostUpdate(GameTime gameTime)
-        {
-            // remove sprites if they are not needed
-        }
+    
 
         
 

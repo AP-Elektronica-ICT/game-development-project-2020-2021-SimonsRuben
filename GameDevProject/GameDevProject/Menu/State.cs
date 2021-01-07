@@ -18,7 +18,7 @@ namespace GameDevProject.Menu
         #region Methods
 
         public abstract void Draw(GameTime gameTime, SpriteBatch _spriteBatch);
-        public abstract void PostUpdate(GameTime gameTime);
+        //public abstract void PostUpdate(GameTime gameTime); voor als er ooit post update nodig in de verschillende game states
         public State(Game1 game , GraphicsDevice graphicsDevice,ContentManager content)
         {
             _game = game;

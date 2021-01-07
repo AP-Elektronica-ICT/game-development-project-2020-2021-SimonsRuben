@@ -90,24 +90,24 @@
             "scale": 0.75,
             "selectedLayer": 5,
             "viewCenter": {
-                "x": 792.6666666666667,
-                "y": 854.6666666666666
+                "x": 799.3333333333333,
+                "y": 479.33333333333337
             }
         },
         "tilemap/CentralRoom.tmx": {
-            "scale": 1,
+            "scale": 0.75,
             "selectedLayer": 5,
             "viewCenter": {
-                "x": 729.5,
-                "y": 439
+                "x": 783.3333333333333,
+                "y": 478.6666666666666
             }
         },
         "tilemap/EndingRoom.tmx": {
             "scale": 1,
             "selectedLayer": 5,
             "viewCenter": {
-                "x": 1042.5,
-                "y": 550
+                "x": 799.5,
+                "y": 479.5
             }
         },
         "tilemap/StartRoom.tmx": {
@@ -126,8 +126,8 @@
             "scale": 1,
             "selectedLayer": 5,
             "viewCenter": {
-                "x": 811.5,
-                "y": 519
+                "x": 799.5,
+                "y": 479.5
             }
         },
         "tilemap/combine.tsx": {
