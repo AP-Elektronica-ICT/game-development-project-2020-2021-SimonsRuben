@@ -26,6 +26,7 @@ namespace GameDevProject.Menu
         LevelPicker Levels;
         private int levelnumb;
         private List<Component> _components;
+        private Texture2D deathbackground;
         #region LOADING GAME
         public GameState(Game1 game,GraphicsDevice graphicsDevice,ContentManager content, int levelnumber): base(game,graphicsDevice,content)
         {
@@ -73,6 +74,9 @@ namespace GameDevProject.Menu
             SpearMantextures.Add(_content.Load<Texture2D>("Sprites/SpearManRight"));
             Spearman.textures = SpearMantextures;
 
+
+            
+
         }
         private void InitializeGameObject()
         {
@@ -99,16 +103,17 @@ namespace GameDevProject.Menu
         {
             var buttonTexture = _content.Load<Texture2D>("menu/Button");
             var buttonFont = _content.Load<SpriteFont>("menu/Font");
+            deathbackground = _content.Load<Texture2D>("menu/deathscreen");
 
             var TryAgain = new Button(buttonTexture, buttonFont)
             {
-                Position = new Vector2(300, 200),
+                Position = new Vector2(720, 600),
                 Text = "Try Again"
             };
             TryAgain.Click += TryAgain_Click;
             var MainMenuButton = new Button(buttonTexture, buttonFont)
             {
-                Position = new Vector2(300, 250),
+                Position = new Vector2(720, 700),
                 Text = "Main Menu"
             };
             MainMenuButton.Click += MainMenu_Click;
@@ -132,6 +137,7 @@ namespace GameDevProject.Menu
         private void DrawDeath(GameTime gameTime, SpriteBatch _spriteBatch)
         {
             _spriteBatch.Begin();
+            _spriteBatch.Draw(deathbackground, new Rectangle(551, 100, 498, 365), Color.White);
             foreach (var component in _components)
             {
                 component.Draw(gameTime, _spriteBatch);

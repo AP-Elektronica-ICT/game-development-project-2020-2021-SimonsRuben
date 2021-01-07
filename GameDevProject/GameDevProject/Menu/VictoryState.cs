@@ -11,20 +11,22 @@ namespace GameDevProject.Menu
     {
         private int levelnumber;
         private List<Component> _components;
+        private Texture2D background;
         public VictoryState(Game1 game, GraphicsDevice graphicsDevice, ContentManager content, int _levelnumber) : base(game, graphicsDevice, content)
         {
             var buttonTexture = _content.Load<Texture2D>("menu/Button");
             var buttonFont = _content.Load<SpriteFont>("menu/Font");
+            background = _content.Load<Texture2D>("menu/Victory");
 
             var NextLevel = new Button(buttonTexture, buttonFont)
             {
-                Position = new Vector2(300, 200),
+                Position = new Vector2(720, 700),
                 Text = "Next Level"
             };
             NextLevel.Click += NextLevel_Click;
             var MainMenuButton = new Button(buttonTexture, buttonFont)
             {
-                Position = new Vector2(300, 250),
+                Position = new Vector2(720, 800),
                 Text = "Main Menu"
             };
             MainMenuButton.Click += MainMenu_Click;
@@ -49,6 +51,7 @@ namespace GameDevProject.Menu
         public override void Draw(GameTime gameTime, SpriteBatch _spriteBatch)
         {
             _spriteBatch.Begin();
+            _spriteBatch.Draw(background, new Rectangle(0, 0, 1600, 960), Color.White);
             foreach (var component in _components)
             {
                 component.Draw(gameTime, _spriteBatch);
