@@ -69,6 +69,42 @@
 /processorParam:TextureFormat=Color
 /build:Menu/Victory.png
 
+#begin music/death.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:music/death.mp3
+
+#begin music/game.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:music/game.mp3
+
+#begin music/game.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:music/game.mp3
+
+#begin music/intro.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:music/intro.mp3
+
+#begin music/intro.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:music/intro.mp3
+
+#begin music/victory.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:music/victory.mp3
+
 #begin sprites/HeroLeft.png
 /importer:TextureImporter
 /processor:TextureProcessor

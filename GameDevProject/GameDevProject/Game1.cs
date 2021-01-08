@@ -10,6 +10,7 @@ using GameDevProject.World;
 using GameDevProject.Entities;
 using GameDevProject.Input;
 using GameDevProject.Menu;
+using Microsoft.Xna.Framework.Media;
 
 namespace GameDevProject
 {
@@ -20,6 +21,8 @@ namespace GameDevProject
         // added state for menu
         private State _currentState;
         private State _nextState;
+
+
 
         public void ChangeState(State state)
         {
@@ -43,9 +46,8 @@ namespace GameDevProject
         protected override void LoadContent()
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
-            
-
             _currentState = new MenuState(this, _graphics.GraphicsDevice, Content);
+
         }
         protected override void Update(GameTime gameTime)
         {

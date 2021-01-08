@@ -9,6 +9,7 @@ using GameDevProject.Detections;
 using TiledSharp;
 using GameDevProject.World;
 using GameDevProject.Entities;
+using Microsoft.Xna.Framework.Media;
 
 namespace GameDevProject.Menu
 {
@@ -27,9 +28,14 @@ namespace GameDevProject.Menu
         private int levelnumb;
         private List<Component> _components;
         private Texture2D deathbackground;
+
+        private Song gameBack;
+        private Song DeathBack;
+        private bool deathlock;
         #region LOADING GAME
         public GameState(Game1 game,GraphicsDevice graphicsDevice,ContentManager content, int levelnumber): base(game,graphicsDevice,content)
         {
+            MediaPlayer.Stop();
             Debug.WriteLine("START GAME");
 
             collisiondetect = new CollisionDetection();
@@ -42,6 +48,7 @@ namespace GameDevProject.Menu
 
             SetStartingLevel(levelnumber);
             MakeDeathScreen();
+            MediaPlayer.Play(gameBack);
 
         }
         private void SetStartingLevel(int levelinput)
@@ -73,6 +80,10 @@ namespace GameDevProject.Menu
             SpearMantextures.Add(_content.Load<Texture2D>("Sprites/SpearManLeft"));
             SpearMantextures.Add(_content.Load<Texture2D>("Sprites/SpearManRight"));
             Spearman.textures = SpearMantextures;
+
+            gameBack = _content.Load<Song>("music/game");
+            DeathBack = _content.Load<Song>("music/death");
+
 
 
             
@@ -123,6 +134,7 @@ namespace GameDevProject.Menu
                 TryAgain,
                 MainMenuButton
             };
+            deathlock = false;
         }
         #endregion
         private void TryAgain_Click(object sender, EventArgs e)
@@ -146,9 +158,16 @@ namespace GameDevProject.Menu
         }
         private void UpdateDeath(GameTime gameTime)
         {
+
             foreach (var component in _components)
             {
                 component.Update(gameTime);
+            }
+            if (!deathlock)
+            {
+                MediaPlayer.Stop();
+                MediaPlayer.Play(DeathBack);
+                deathlock = true;
             }
         }
 

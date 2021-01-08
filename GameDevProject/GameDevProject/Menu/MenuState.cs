@@ -5,12 +5,13 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Diagnostics;
+using Microsoft.Xna.Framework.Media;
 
 namespace GameDevProject.Menu
 {
     class MenuState : State
     {
-        /* DE HELE MENU MAP IS GEMAAKT ROND HET PRINCIPE VAN EEN VIDEO DIE IK HEB GEVOLGT
+        /* DE HELE MENU STATE IS GEMAAKT ROND HET PRINCIPE VAN EEN VIDEO DIE IK HEB GEVOLGT
          * 
          * LINK: https://youtu.be/76Mz7ClJLoE
          * 
@@ -20,16 +21,21 @@ namespace GameDevProject.Menu
          * 
          * 
          */
-
+        //Code voor media player werd afgeleid uit volgende video
+        //link: https://youtu.be/Vw-UCTLhIFw
 
 
         private List<Component> _components;
         private Texture2D background;
+        private Song introSong;
         public MenuState(Game1 game, GraphicsDevice graphicsDevice, ContentManager content) : base(game,graphicsDevice,content)
         {
+            MediaPlayer.Stop();
             var buttonTexture = _content.Load<Texture2D>("menu/Button");
             var buttonFont = _content.Load<SpriteFont>("menu/Font");
             background = _content.Load<Texture2D>("menu/background");
+            introSong = _content.Load<Song>("music/intro");
+            MediaPlayer.Play(introSong);
 
             var newGameButton = new Button(buttonTexture, buttonFont)
             {
@@ -62,6 +68,7 @@ namespace GameDevProject.Menu
         private void NewGameButton_Click(object sender, EventArgs e)
         {
             Debug.WriteLine("New game");
+
             _game.ChangeState(new GameState(_game, _graphicsDevice, _content,1));
         }
 
@@ -95,6 +102,7 @@ namespace GameDevProject.Menu
         }
         public override void Update(GameTime gameTime)
         {
+            
             foreach (var component in _components)
             {
                 component.Update(gameTime);
