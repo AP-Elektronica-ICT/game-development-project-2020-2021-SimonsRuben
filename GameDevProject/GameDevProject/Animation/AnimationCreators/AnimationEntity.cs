@@ -40,7 +40,6 @@ namespace GameDevProject.Animation.AnimationCreators
 
         public int[,] GetAnimationList(int indexnumber)
         {
-            //this.CreateList();
             return this.AnimationList[indexnumber];
         }
 

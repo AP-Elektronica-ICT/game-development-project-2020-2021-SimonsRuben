@@ -20,14 +20,10 @@ namespace GameDevProject
     {
         public const int height = 60;
         public const int Width = 50;
-
-        
-        
         List<Texture2D> herotexture;
         List<List<Animatie>> animations;
         public LoopRichting richting { get ; set; }
         public CharState status { get; set; }
-
         private IinputReader inputreader;
         private IGameCommand movecommand;
         public Vector2 Position { get; set; }
@@ -38,12 +34,7 @@ namespace GameDevProject
             get { return _CollisionRectangle; }
             set { _CollisionRectangle = value; }
         }
-
-        
-
         private Rectangle _CollisionRectangle;
-
-
         public Rectangle Attackbox { get; set; }
         public bool Attacklock { get; set ; }
         public int Health { get ; set ; }
@@ -59,16 +50,16 @@ namespace GameDevProject
             status = CharState.idle;
             richting = LoopRichting.rechts;
             herotexture = textures;
+
+            //combat
             this.Attackbox = new Rectangle(0, 0, 60, 60);
             Attacklock = false;
-            Health = 100;
-            Damage = 200;
+            Health = 150;
+            Damage = 80;
 
             //animations
             AnimationCreator creator = new AnimationCreator();
             animations = creator.GetHeroAnimation();
-            
-
 
             //movement and input
             this.inputreader = new KeyboardReader(this);
@@ -82,9 +73,7 @@ namespace GameDevProject
         }
         public void Draw(SpriteBatch _spriteBatch)
         {
-            
             _spriteBatch.Draw(herotexture[(int)richting], Position, animations[(int)status][(int)richting].CurrentFrame.SourceRectangle, Color.White);
-            
         }
 
         public void Update(GameTime gametime)
@@ -102,8 +91,6 @@ namespace GameDevProject
                 _CollisionRectangle.Y = (int)Position.Y;
 
             }
-            
-
         }
         private void updateAttackbox()
         {
@@ -174,7 +161,6 @@ namespace GameDevProject
             this.Health -= dmg;
             if (Health < 0)
             {
-                //Debug.Write("player death");
                 this.status = CharState.death;
             }
 

@@ -22,6 +22,7 @@ namespace GameDevProject.Menu
             background = _content.Load<Texture2D>("menu/Victory");
             VictoryBackground = _content.Load<Song>("music/victory");
             MediaPlayer.Play(VictoryBackground);
+
             var NextLevel = new Button(buttonTexture, buttonFont)
             {
                 Position = new Vector2(720, 700),

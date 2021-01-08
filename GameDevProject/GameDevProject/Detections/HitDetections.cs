@@ -10,14 +10,11 @@ namespace GameDevProject.Detections
     {
         private Hero hero;
         private List<Enemy> enemies;
-
-
         public HitDetections(Hero player,List<Enemy> aliveenemies)
         {
             this.hero = player;
             this.enemies = aliveenemies;
         }
-        
         public void update(List<Enemy> aliveenemies)
         {
             this.enemies = aliveenemies;
@@ -34,12 +31,9 @@ namespace GameDevProject.Detections
                     if (CollisionDetection.CheckCollision(hero.Attackbox,entity.CollisionRectangle))
                     {
                         entity.TakeDamage(hero.Damage);
-                        //Debug.WriteLine("player hits enemy");
                     }
                 }
             }
-
-
         }
 
         private void CheckEnemyToHero()

@@ -23,8 +23,6 @@ namespace GameDevProject.Entities
             AnimationCreator creator = new AnimationCreator();
             animations = creator.GetSpearmanAnimation();
             CollisionRectangle = new Rectangle((int)Position.X, (int)Position.Y, Spearman.Width - 20, Spearman.height);//-20 offset door de speer die hij vastheeft
-
-
         }
     }
 }

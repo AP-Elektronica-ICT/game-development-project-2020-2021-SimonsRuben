@@ -40,9 +40,6 @@ namespace GameDevProject.World
             this.coldetect = collisionDetect;
             this.Levels.Add(new Wereld(CreateWorld(level1), new Vector2(0, 1),new  Vector2(3,1)));
             this.Levels.Add(new Wereld(CreateWorld(level2), new Vector2(0, 1), new Vector2(3, 1)));
-
-
-
         }
         public void SetLevel(int levelinput)
         {
@@ -72,26 +69,7 @@ namespace GameDevProject.World
         public void Update(GameTime gametime)
         {
             Levels[levelnumber].Update(hero, gametime);
-            
         }
-        /*
-        private void NextLevel()
-        {
-            if (levelnumber + 1 < Levels.Count)
-            {
-                levelnumber++;
-
-                hero.Spawn(Levels[levelnumber].ActiveRoom.GetSpawn());
-                Debug.WriteLine("LevelCompleted loading next level");
-            }
-            else if (levelnumber +1 == Levels.Count)
-            {
-                Debug.WriteLine("VICTORY");
-                //need to add victory screen
-            }
-            
-        }
-        */
         public Wereld GetActiveWereld()
         {
             return Levels[levelnumber];
@@ -101,7 +79,6 @@ namespace GameDevProject.World
 
         private Room[,] CreateWorld(room[,] input)
         {              
-            //
             Room[,] temp = new Room[input.GetLength(0), input.GetLength(1)];
             for (int x = 0; x < input.GetLength(0); x++)
             {

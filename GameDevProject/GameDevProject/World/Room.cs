@@ -16,7 +16,6 @@ namespace GameDevProject.World
     class Room : IGameObject
     {
         private TmxMap map;
-
         private Texture2D tileset;
         private int tileWidth;
         private int tileHeight;
@@ -161,7 +160,6 @@ namespace GameDevProject.World
                     // Empty tile, do nothing
                     if (gid == 0)
                     {
-
                     }
                     else
                     {
@@ -182,12 +180,9 @@ namespace GameDevProject.World
 
         public void Update(GameTime gametime)
         {
-
-            //Debug.WriteLine("");
             foreach (Enemy entity in enemies)
             {
                 entity.Update(gametime);
-                //Debug.Write("Enemy: " + entity.status);
             }
         }
         public bool RoomCleared()

@@ -17,9 +17,7 @@ namespace GameDevProject.World
         private Vector2 end;
         private Room[,] world;
         public bool completed;
-
         private Room _activeRoom;
-
         public Room ActiveRoom
         {
             get 
@@ -106,9 +104,6 @@ namespace GameDevProject.World
                     }
 
                 }
-
-                //Debug.WriteLine((side)PickedDoor);
-                
             }
         }
         private int CheckDoors(Hero hero)
@@ -120,7 +115,6 @@ namespace GameDevProject.World
                     return i;
                 }
             }
-
             return -1;
         }
 

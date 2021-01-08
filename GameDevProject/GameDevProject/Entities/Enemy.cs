@@ -22,7 +22,6 @@ namespace GameDevProject.Entities
         public LoopRichting richting { get; set; }
         private AIReader inputreader;
         private IGameCommand movecommand;
-
         public Vector2 Position { get; set; }
         public Vector2 HorizontalMovement { get; set; }
         public Vector2 VerticalMovement { get; set; }
@@ -51,14 +50,14 @@ namespace GameDevProject.Entities
             this.Attackbox = new Rectangle(0, 0, 60, 60);
             Attacklock = false;
             Health = 100;
-            Damage = 5;
+            Damage = 10;
+
 
             //animations zal gegeven worden door de overerving
             //movement and input
             this.inputreader = AiInputReader;
             this.inputreader.SetEntity(this);
             this.movecommand = new MoveCommand(objects);
-            
 
         }
         public void Spawn(Vector2 pos)
@@ -89,8 +88,6 @@ namespace GameDevProject.Entities
         }
         private void updateAttackbox()
         {
-            
-
             if (this.richting == LoopRichting.rechts)
             {
                 this.Attackbox = new Rectangle((int)this.Position.X + this.CollisionRectangle.Width, (int)this.Position.Y, (int)this.Attackbox.Width, (int)this.Attackbox.Height);
@@ -161,7 +158,6 @@ namespace GameDevProject.Entities
             this.Health -= dmg;
             if (Health < 0)
             {
-                //Debug.Write("enemy death");
                 this.status = CharState.death;
             }
         }

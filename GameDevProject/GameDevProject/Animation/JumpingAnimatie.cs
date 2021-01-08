@@ -9,16 +9,10 @@ namespace GameDevProject.Animation
 {
     class JumpingAnimatie : Animatie
     {
-        
         public new AnimationFrame CurrentFrame { get; set; }
-
-        
-
         public JumpingAnimatie()
         {
-
-            frames = new List<AnimationFrame>();
-            
+            frames = new List<AnimationFrame>(); 
         }
         public override void AddFrame(AnimationFrame animationframe)
         {

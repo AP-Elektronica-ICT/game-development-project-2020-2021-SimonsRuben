@@ -18,6 +18,7 @@ namespace GameDevProject
     {
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
+
         // added state for menu
         private State _currentState;
         private State _nextState;

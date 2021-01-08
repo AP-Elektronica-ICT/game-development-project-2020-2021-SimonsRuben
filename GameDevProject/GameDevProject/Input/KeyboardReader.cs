@@ -24,7 +24,6 @@ namespace GameDevProject.Input
             {
                 player.VerticalMovement = new Vector2(1, -12f);
             }
-            
         }
 
         public void ReadAttack()
@@ -34,7 +33,6 @@ namespace GameDevProject.Input
             if (keyState.IsKeyDown(Keys.X) && player.status != CharState.attack)
             {
                 player.status = CharState.attack;
-                //Debug.WriteLine("attack");
             }
             
         }
@@ -43,15 +41,12 @@ namespace GameDevProject.Input
 
         public Vector2 ReadLeftRight()
         {
-            
             Vector2 direction = new Vector2();
             KeyboardState keyboardState = Keyboard.GetState();
 
             if (keyboardState.IsKeyDown(Keys.Left))
             {
                 direction = new Vector2(-1, 0);
-                
-
             }
             if (keyboardState.IsKeyDown(Keys.Right))
             {

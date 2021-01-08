@@ -12,16 +12,9 @@ namespace GameDevProject.Animation.AnimationCreators
 
      private Animatie CreateAnimation(string type, int[,] frames)
         {
-            /*
-            Debug.WriteLine($@"
-DEBUG FACTORY
-TYPE = {type}
-frames = {frames.GetLength(0)}
-");*/
             try
             {
                 Animatie temp = (Animatie)Activator.CreateInstance(Type.GetType($"GameDevProject.Animation.{type}"), new Object[] { });
-                //Debug.WriteLine(temp.ToString());
                 for (int i = 0; i < frames.GetLength(0); i++)
                 {
                     temp.AddFrame(new AnimationFrame(new Rectangle(frames[i, 0], frames[i, 1], frames[i, 2], frames[i, 3])));
@@ -49,7 +42,6 @@ frames = {frames.GetLength(0)}
         public List<List<Animatie>> CreateTotalAnimation(AnimationEntity animationEntity)
         {
             List<List<Animatie>> complete = new List<List<Animatie>>();
-            //Debug.WriteLine(StatusAnimation.GetLength(1));
             for (int i = 0; i < StatusAnimation.GetLength(1); i++)
             {
                 complete.Add(CreateBothAnimations(StatusAnimation[1, i], animationEntity.GetAnimationList(i * 2), animationEntity.GetAnimationList((i * 2) + 1)));

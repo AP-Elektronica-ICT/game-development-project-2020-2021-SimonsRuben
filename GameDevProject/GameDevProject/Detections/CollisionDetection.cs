@@ -9,16 +9,12 @@ namespace GameDevProject.Detections
     class CollisionDetection
     {
         public List<Rectangle> walls;
-
-
-
         public bool checkwallsandplatforms(Rectangle character)
         {
             foreach (Rectangle item in walls)
             {
                 if (CheckCollision(character,item))
                 {
-                    //Debug.WriteLine("COLLISION");
                     return true;
                 }
                 
@@ -40,7 +36,6 @@ namespace GameDevProject.Detections
             {
                 if (character.Top < item.Bottom && character.Top > item.Top)
                 {
-                    //Debug.WriteLine("HEAD");
                     return true;
                 }
 
@@ -53,8 +48,6 @@ namespace GameDevProject.Detections
             {
                 if (CheckCollision(character, item))
                 {
-                    //Debug.WriteLine("COLLISION");
-                    //Debug.WriteLine(item.Top);
                     return item.Top;
                 }
 

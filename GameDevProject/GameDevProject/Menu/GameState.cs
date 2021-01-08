@@ -19,7 +19,6 @@ namespace GameDevProject.Menu
         Hero hero;
         CollisionDetection collisiondetect;
         List<Texture2D> SpearMantextures;
-        Texture2D debugchar;
         TmxMap map;
         Texture2D tileset;
         string[] AllRooms = { "StartRoom", "CentralRoom", "BottemRoom", "TopRoom", "EndingRoom" };
@@ -36,7 +35,6 @@ namespace GameDevProject.Menu
         public GameState(Game1 game,GraphicsDevice graphicsDevice,ContentManager content, int levelnumber): base(game,graphicsDevice,content)
         {
             MediaPlayer.Stop();
-            Debug.WriteLine("START GAME");
 
             collisiondetect = new CollisionDetection();
             LoadSprites();
@@ -72,10 +70,6 @@ namespace GameDevProject.Menu
             Herotextures.Add(_content.Load<Texture2D>("Sprites/HeroLeft"));
             Herotextures.Add(_content.Load<Texture2D>("Sprites/HeroRight"));
 
-            /*debugchar = new Texture2D(GraphicsDevice, 1, 1);
-            debugchar.SetData(new Color[] { Color.DarkSlateGray });*/
-
-
             SpearMantextures = new List<Texture2D>();
             SpearMantextures.Add(_content.Load<Texture2D>("Sprites/SpearManLeft"));
             SpearMantextures.Add(_content.Load<Texture2D>("Sprites/SpearManRight"));
@@ -83,10 +77,6 @@ namespace GameDevProject.Menu
 
             gameBack = _content.Load<Song>("music/game");
             DeathBack = _content.Load<Song>("music/death");
-
-
-
-            
 
         }
         private void InitializeGameObject()
@@ -158,7 +148,6 @@ namespace GameDevProject.Menu
         }
         private void UpdateDeath(GameTime gameTime)
         {
-
             foreach (var component in _components)
             {
                 component.Update(gameTime);
@@ -197,10 +186,8 @@ namespace GameDevProject.Menu
 
         public override void Draw(GameTime gameTime, SpriteBatch _spriteBatch)
         {
-            //Debug.Write("Drawing Game");
             _spriteBatch.Begin();
             Levels.Draw(_spriteBatch);
-            // _spriteBatch.Draw(debugchar,enemies[0].Attackbox, Color.White); werdt gebruikt voor debug hitboxen en collisions
             hero.Draw(_spriteBatch);
             _spriteBatch.End();
             if (hero.status == CharState.death)

@@ -37,6 +37,7 @@ namespace GameDevProject.Menu
             introSong = _content.Load<Song>("music/intro");
             MediaPlayer.Play(introSong);
 
+
             var newGameButton = new Button(buttonTexture, buttonFont)
             {
 
@@ -67,15 +68,12 @@ namespace GameDevProject.Menu
 
         private void NewGameButton_Click(object sender, EventArgs e)
         {
-            Debug.WriteLine("New game");
-
             _game.ChangeState(new GameState(_game, _graphicsDevice, _content,1));
         }
 
 
         private void LoadGameButton_Click(object sender, EventArgs e)
         {
-            Debug.WriteLine("Level 2 ");
             _game.ChangeState(new GameState(_game, _graphicsDevice, _content, 2));
         }
 
@@ -83,14 +81,13 @@ namespace GameDevProject.Menu
 
         private void QuitGameButton_Click(object sender, EventArgs e)
         {
-            Debug.WriteLine("Quiting Game");
             _game.Exit();
         }
 
 
         public override void Draw(GameTime gameTime, SpriteBatch _spriteBatch)
         {
-            //Debug.WriteLine("Draw Menu");
+
             _spriteBatch.Begin();
 
             _spriteBatch.Draw(background, new Rectangle(0, 0, 1600, 960), Color.White);
